@@ -1,0 +1,3 @@
+django
+psycopg2
+djangorestframework

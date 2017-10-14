@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+    db:
+      image: postgres
+      environment:              
+        POSTGRES_PASSWORD: password123
+      ports:
+        - "5432:5432"       
+        # (HOST:CONTAINER)
+    web:
+      build: ./api
+      command: python api/manage.py runserver 0.0.0.0:8000
+      restart: always
+      volumes:
+        - .:/api
+        # (HOST:CONTAINER)
+      ports:
+        - "8000:8000"
+        # (HOST:CONTAINER)
+      depends_on:
+        - db
