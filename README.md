@@ -382,8 +382,8 @@ docker exec -it <Container ID> bash
 進入後我們可以開始 migrate
 
 ```cmd
-python manage.py makemigrations musics
-python manage.py migrate
+python api/manage.py makemigrations musics
+python api/manage.py migrate
 ```
 
 ![](https://i.imgur.com/zMmZKuL.png)
@@ -391,7 +391,7 @@ python manage.py migrate
 順便在建立一個 superuser
 
 ```cmd
-python manage.py createsuperuser
+python api/manage.py createsuperuser
 ```
 
 接著我們可以試著使用 GUI 介紹連接 db
