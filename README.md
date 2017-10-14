@@ -4,8 +4,8 @@
 
  教你用 [Docker](https://www.docker.com/) 建立 [Django](https://github.com/django/django) + [PostgreSQL](https://www.postgresql.org/) 📝
 
-* [Youtube Tutorial PART 1](xxxx)
-* [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](xxx)
+* [Youtube Tutorial PART 1](https://youtu.be/Wg5m0-Jyox8)
+* [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](https://youtu.be/aZ6woJ7qekE)
 
 ## 簡介
 
@@ -309,7 +309,7 @@ docker stop $(docker ps -q)
 
 ## 用 Docker 實戰 Django 以及 Postgre
 
-* [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](xxx)
+* [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](https://youtu.be/aZ6woJ7qekE)
 
 上面介紹了那麼多，來實戰一下是必須的 :satisfied:
 
