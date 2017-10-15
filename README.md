@@ -4,7 +4,7 @@
 
  教你用 [Docker](https://www.docker.com/) 建立 [Django](https://github.com/django/django) + [PostgreSQL](https://www.postgresql.org/) 📝
 
-* [Youtube Tutorial PART 1](https://youtu.be/Wg5m0-Jyox8)
+* [Youtube Tutorial PART 1 - Docker 基本教學 - 從無到有 Docker-Beginners-Guide](https://youtu.be/Wg5m0-Jyox8)
 * [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](https://youtu.be/aZ6woJ7qekE)
 
 ## 簡介
@@ -15,13 +15,27 @@
 
 算是近幾年才開始紅的技術，蠻多公司都有使用 Docker，而且真的很方便，值得大家去了解一下 :smile:
 
+如果你有環境上不統一的問題？ 請用 Docker :smile:
+
+如果你有每次建立環境都快抓狂的問題？ 請用 Docker :blush:
+
+如果你想要高效率、輕量、秒開的環境，請用 Docker :blush:
+
+如果你不想搞死自己，請用 Docker :smile:
+
+如果你想潮到出水，請一定要用 Docker :laughing:
+
 ### 什麼是 Docker
+
+[Docker](https://www.docker.com/) 是一個開源專案，出現於 2013 年初，最初是 Dotcloud 公司內部的 Side-Project。
+
+它基於 Google 公司推出的 Go 語言實作。（ Dotcloud 公司後來改名為 Docker ）
 
 技術原理我們這邊就不提了，簡單提一下他的好處。
 
 我們先來看看官網的說明
 
-Comparing Containers and Virtual Machines
+Comparing Containers and Virtual Machines ( 傳統的虛擬化 )
 
 ![](https://i.imgur.com/IqiGyoJ.png)
 
@@ -34,6 +48,25 @@ Virtual Machines 是什麼？
 類似 [https://www.virtualbox.org/](https://www.virtualbox.org/)，我們可能用它裝裝看其他作業系統，例如說
 
 我是 MAC，但我想玩 Windows，我就會在 MAC 中裝 VM 並且灌 Windows 系統。
+
+一個表格了解 Docker 有多棒 :+1:
+
+Feauture  | Containers                  |  Virtual Machines ( 傳統的虛擬化 )
+--      | ----------            | ----------
+ 啟動   | 秒開 | 最快也要分鐘
+ 容量 | MB        | GB
+ 效能 | 快        | 慢
+ 支援數量 | 非常多 Containers        | 10多個就很了不起了
+ 複製相同環境 | 快        | 超慢
+
+不理解:question::question::question:
+
+我們來看一張圖，包準你懂
+
+![](https://i.imgur.com/2gE9qec.png)
+
+圖的來源
+[https://blog.jayway.com/2015/03/21/a-not-very-short-introduction-to-docker/](https://blog.jayway.com/2015/03/21/a-not-very-short-introduction-to-docker/)
 
 ### 為什麼要使用 Docker
 
@@ -63,9 +96,33 @@ Virtual Machines 是什麼？
 
 ### Docker 概念
 
-我建議大家去了解一下 Docker 中的幾個名詞，分別為 Image，Container，Registry
+建議大家先了解一下 Docker 中的幾個名詞，分別為
 
-這邊我就不再解釋惹，留給大家做作功課:stuck_out_tongue:
+***Image***
+
+映像檔，可以把它想成是以前我們在玩 VM 的 Guest OS（ 安裝在虛擬機上的作業系統 ）。
+
+Image 是唯讀（ R\O ）
+
+***Container***
+
+容器，利用映像檔（ Image ）所創造出來的，一個 Image 可以創造出多個不同的 Container，
+
+Container 也可以被啟動、開始、停止、刪除，並且互相分離。
+
+Container 在啟動的時候會建立一層在最外（上）層並且是讀寫模式（ R\W ）。
+
+這張圖解釋了 Image 是唯讀（ R\O ）以及 Container 是讀寫模式（ R\W ） 的關係
+
+![](https://i.imgur.com/wVvrWwJ.png)
+
+更多關係可參考 [https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/#images-and-layers](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/#images-and-layers)
+
+***Registry***
+
+可以把它想成類似 [GitHub](https://github.com/)，裡面存放了非常多的 Image ，可在 [Docker Hub](https://hub.docker.com/) 中查看。
+
+更詳細的我這邊就不再解釋惹，留給大家做作功課:stuck_out_tongue:
 
 ## 安裝
 
@@ -85,6 +142,8 @@ Windows
 
 接著如果你的電腦沒有啟用 [Hyper-V](https://msdn.microsoft.com/zh-tw/library/hh831531(v=ws.11).aspx) ，他會叫你重啟電腦
 (一樣，點下去就對惹)
+
+( 更多可 Hyper-V 介紹請參考[https://docs.microsoft.com/zh-tw/virtualization/hyper-v-on-windows/about/](https://docs.microsoft.com/zh-tw/virtualization/hyper-v-on-windows/about/) )
 
 ![](https://i.imgur.com/xCbQI1k.png)
 
