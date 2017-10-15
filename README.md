@@ -162,7 +162,7 @@ docker-compose --version
 
 裝完了之後，建議大家再多裝一個 [Kitematic](https://kitematic.com/)，他是 GUI 介面的，方便你使用 Docker，
 
-我知道打指令我知道打指令很潮，但還是建議裝一下。
+我知道打指令很潮，但還是建議裝一下。
 
 直接對著你的 Docker 圖示右鍵，就可以看到 [Kitematic](https://kitematic.com/)
 
