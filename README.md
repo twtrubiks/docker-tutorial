@@ -63,7 +63,7 @@ Feauture  | Containers                  |  Virtual Machines ( 傳統的虛擬�
 
 我們來看一張圖，包準你懂
 
-![](https://i.imgur.com/2gE9qec.png)
+![](https://i.imgur.com/H8wmOUh.jpg)
 
 圖的來源
 [https://blog.jayway.com/2015/03/21/a-not-very-short-introduction-to-docker/](https://blog.jayway.com/2015/03/21/a-not-very-short-introduction-to-docker/)
@@ -134,18 +134,18 @@ Windows
 
 下載 stable 版本
 
-![](https://i.imgur.com/ecAxMNX.png)
+![](https://i.imgur.com/ryKtNXm.jpg)
 
 接下來就是無腦安裝，安裝完後他會叫你登出電腦，點下去後就會幫你登出電腦
 
-![](https://i.imgur.com/3eeEptv.png)
+![](https://i.imgur.com/EE7XmYM.jpg)
 
 接著如果你的電腦沒有啟用 [Hyper-V](https://msdn.microsoft.com/zh-tw/library/hh831531(v=ws.11).aspx) ，他會叫你重啟電腦
 (一樣，點下去就對惹)
 
 ( 更多可 Hyper-V 介紹請參考[https://docs.microsoft.com/zh-tw/virtualization/hyper-v-on-windows/about/](https://docs.microsoft.com/zh-tw/virtualization/hyper-v-on-windows/about/) )
 
-![](https://i.imgur.com/xCbQI1k.png)
+![](https://i.imgur.com/YG79VE1.jpg)
 
 重新開機後，你就會發現可愛的 Docker 在右下角蹦出來惹
 
@@ -168,7 +168,7 @@ docker-compose --version
 
 ![](https://i.imgur.com/gdVFFMT.png)
 
-![](https://i.imgur.com/sQRU8RC.png)
+![](https://i.imgur.com/SRaHNCP.jpg)
 
 下載回來直接解壓縮雙點擊即可使用
 
@@ -176,7 +176,7 @@ docker-compose --version
 
 記得再設定一個東西 Shared Drives
 
-![](https://i.imgur.com/70OjgXN.png)
+![](https://i.imgur.com/a6dqWU8.jpg)
 
 MAC
 
@@ -260,9 +260,46 @@ cat /etc/os-release
 docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 ```
 
+在這裡先解釋一下一個名詞，稱為 volume， volume 是 Docker 最推薦存放 persisting data（ 數據 ）的機制，
+
+使用 volume 有下列優點
+
+* Volumes are easier to back up or migrate than bind mounts.
+* You can manage volumes using Docker CLI commands or the Docker API.
+* Volumes work on both Linux and Windows containers.
+* Volumes can be more safely shared among multiple containers.
+* Volume drivers allow you to store volumes on remote hosts or cloud providers, to encrypt the contents of volumes, or to add other functionality.
+* A new volume's contents can be pre-populated by a container.
+
+也可參考下圖
+
+![](https://i.imgur.com/fiIt0kS.png)
+
+透過 volume，可以很方便的管理 data，不用特別連進去 Container 修改 or 獲取資料。
+
+更詳細的可參考 [https://docs.docker.com/engine/admin/volumes/volumes/](https://docs.docker.com/engine/admin/volumes/volumes/)
+
+查看目前的 volume
+
+```cmd
+docker volume ls [OPTIONS]
+```
+
+創造一個 volume
+
+```cmd
+docker volume create [OPTIONS] [VOLUME]
+```
+
+刪除一個 volume
+
+```cmd
+docker volume rm [OPTIONS] VOLUME [VOLUME...]
+```
+
 再來要介紹 docker-compose，可參考官網 [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
 
-![](https://i.imgur.com/Aq13Bk0.png)
+![](https://i.imgur.com/YxrrO7t.png)
 
 Compose 是定義和執行多 Container 管理的工具，不懂我在說什麼:question::question::question:
 
@@ -457,11 +494,11 @@ python api/manage.py createsuperuser
 
 因為我們是用 [PostgreSQL](https://www.postgresql.org/)  ，可以透過 [pgadmin](https://www.pgadmin.org/) 連線
 
-![](https://i.imgur.com/c9XfJQ3.png)
+![](https://i.imgur.com/2Hdt7wU.png)
 
 我們剛剛 migrate 的東西有存在
 
-![](https://i.imgur.com/DhfxCMi.png)
+![](https://i.imgur.com/PEUfGRy.png)
 
 我們不需要再重新啟動
 
@@ -484,6 +521,39 @@ python api/manage.py createsuperuser
 這次就不會再和你說你沒有 migrate 了
 
 ![](https://i.imgur.com/zIBkL3t.png)
+
+## 其他管理 Docker GUI 的工具
+
+除了 [Kitematic](https://kitematic.com/) 之外，還有其他不錯的推薦給大家，這次要介紹的就是
+
+[portainer](https://github.com/portainer/portainer) 功能強大又好用 :fire:
+
+其他如果去看看 [Kitematic](https://github.com/docker/kitematic) 以及 [portainer](https://github.com/portainer/portainer) 的 github，你會發現 [portainer](https://github.com/portainer/portainer) 感覺比較有在 maintenance :smile:
+
+而且我使用了 [portainer](https://github.com/portainer/portainer) 之後，真心大推 :smiley:
+
+安裝方法可參考 [https://portainer.io/install.html](https://portainer.io/install.html)
+
+```cmd
+docker volume create portainer_data
+docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+```
+
+之後查看 [http://localhost:9000/](http://localhost:9000/) 就會看到下圖
+
+然後設定帳號、密碼
+
+![](https://i.imgur.com/exdMf2p.png)
+
+選 Local or Remote
+
+![](https://i.imgur.com/3mkNMxF.png)
+
+畫面真的不錯看，而且資訊也很豐富 :heart_eyes:
+
+![](https://i.imgur.com/UOabLoZ.png)
+
+相信我，你使用完他之後，你會默默的邊緣化 [Kitematic](https://kitematic.com/) :smirk:
 
 ## 查看 port 佔用狀況
 
@@ -537,7 +607,7 @@ lsof -i tcp:5432
 
 ## 後記：
 
-Docker 算是我最近才開始接觸的，所以也算是新手，如果我有任何講錯的，歡迎和我說，我會在修改  :grinning:
+Docker 算是我最近才開始接觸的，所以也算是新手，如果我有任何講錯的，歡迎和我說，我會再修改  :grinning:
 
 我發現 Docker 可以玩的真的很多，像是可以考慮建立一個 CI Server，用 Jenkins 所提供的各種服務，
 
@@ -555,6 +625,7 @@ Docker 算是我最近才開始接觸的，所以也算是新手，如果我有�
 ## Reference
 
 * [https://docs.docker.com/](https://docs.docker.com/)
+* [portainer](https://github.com/portainer/portainer)
 
 ## License
 

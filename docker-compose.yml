@@ -1,22 +1,30 @@
 version: '3'
-
 services:
+
     db:
+      container_name: 'postgres'
       image: postgres
-      environment:              
+      environment:
         POSTGRES_PASSWORD: password123
       ports:
-        - "5432:5432"       
+        - "5432:5432"
         # (HOST:CONTAINER)
+      volumes:
+        - pgdata:/var/lib/postgresql/data/
+
     web:
       build: ./api
-      command: python api/manage.py runserver 0.0.0.0:8000
+      command: python manage.py runserver 0.0.0.0:8000
       restart: always
       volumes:
-        - .:/api
+        - api_data:/docker_api
         # (HOST:CONTAINER)
       ports:
         - "8000:8000"
         # (HOST:CONTAINER)
       depends_on:
         - db
+
+volumes:
+    api_data:
+    pgdata:
