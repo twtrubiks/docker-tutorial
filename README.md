@@ -219,6 +219,32 @@ docker ps -a
 
 不了解 Git 可以參考 [Git-Tutorials GIT基本使用教學](https://github.com/twtrubiks/Git-Tutorials)）
 
+新建並啟動 Container
+
+```cmd
+docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
+```
+
+舉個例子
+
+```cmd
+docker run -d -p 8080:80 my_image service nginx start
+```
+
+`-d` 代表在 Detached（ 背景 ）執行，如不加`-d`，預設會 foreground ( 前景 ) 執行
+
+`-p` 代表將本機的 8080 port 的所有流量轉發到 container 中的 80 port
+
+更詳細的可參考 [https://docs.docker.com/engine/reference/run/](https://docs.docker.com/engine/reference/run/)
+
+啟動 Container
+
+```cmd
+docker start [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+停止 Container
+
 ```cmd
 docker stop [OPTIONS] CONTAINER [CONTAINER...]
 ```
@@ -271,11 +297,13 @@ docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 * Volume drivers allow you to store volumes on remote hosts or cloud providers, to encrypt the contents of volumes, or to add other functionality.
 * A new volume's contents can be pre-populated by a container.
 
+在 container 的可寫層中，使用 volume 是一個比較好的選擇，因為他不會增加 container 的容量，
+
+volume 的內容存在於 container 之外。
+
 也可參考下圖
 
 ![](https://i.imgur.com/fiIt0kS.png)
-
-透過 volume，可以很方便的管理 data，不用特別連進去 Container 修改 or 獲取資料。
 
 更詳細的可參考 [https://docs.docker.com/engine/admin/volumes/volumes/](https://docs.docker.com/engine/admin/volumes/volumes/)
 
@@ -308,6 +336,8 @@ Compose 是定義和執行多 Container 管理的工具，不懂我在說什麼:
 所以說我們需要有 Compose 來管理這些，透過 `docker-compose.yml` ( YML 格式 ) 文件。
 
 `docker-compose.yml` ( YML 格式 ) 文件 的寫法可參考 [https://docs.docker.com/compose/compose-file/](https://docs.docker.com/compose/compose-file/)
+
+也可以直接參考官網範例 [https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples](https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples)
 
 Compose 的 Command-line 很多和 Docker 都是類似的
 
@@ -411,7 +441,7 @@ docker stop $(docker ps -q)
 
 我們使用 [Django-REST-framework 基本教學 - 從無到有 DRF-Beginners-Guide](https://github.com/twtrubiks/django-rest-framework-tutorial) 來當範例
 
-只有幾個地方必須修改一下，
+有幾個地方必須修改一下，
 
 將 `settings.py`  裡面的 db 連線改成 [PostgreSQL](https://www.postgresql.org/)
 
@@ -428,13 +458,60 @@ DATABASES = {
 }
 ```
 
-建議也將 `ALLOWED_HOSTS = []` 改為 `ALLOWED_HOSTS = ['*']`
+建議也將 `ALLOWED_HOSTS = []` 改為 `ALLOWED_HOSTS = ['*']` 。
 
-補充一下 :heart:
+再來是兩個很重要的檔案，分別為 `Dockerfile` 和 `docker-compose.yml`
 
-`docker-compose.yml` 和 `Dockerfile` 裡面的指令也是有很多可以學習的 :wink:
+`Dockerfile`
 
-這裡就不細講了:blush:
+```text
+FROM python:3.6.2
+LABEL maintainer twtrubiks
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /docker_api
+WORKDIR /docker_api
+COPY . /docker_api/
+RUN pip install -r requirements.txt
+```
+
+詳細可參考 [https://docs.docker.com/engine/reference/builder/](https://docs.docker.com/engine/reference/builder/)
+
+`docker-compose.yml`
+
+```yml
+version: '3'
+services:
+
+    db:
+      container_name: 'postgres'
+      image: postgres
+      environment:
+        POSTGRES_PASSWORD: password123
+      ports:
+        - "5432:5432"
+        # (HOST:CONTAINER)
+      volumes:
+        - pgdata:/var/lib/postgresql/data/
+
+    web:
+      build: ./api
+      command: python manage.py runserver 0.0.0.0:8000
+      restart: always
+      volumes:
+        - api_data:/docker_api
+        # (HOST:CONTAINER)
+      ports:
+        - "8000:8000"
+        # (HOST:CONTAINER)
+      depends_on:
+        - db
+
+volumes:
+    api_data:
+    pgdata:
+```
+
+詳細可參考 [https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples](https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples)
 
 設定完了之後，接下來我們就可以啟動他了
 
@@ -478,8 +555,8 @@ docker exec -it <Container ID> bash
 進入後我們可以開始 migrate
 
 ```cmd
-python api/manage.py makemigrations musics
-python api/manage.py migrate
+python manage.py makemigrations musics
+python manage.py migrate
 ```
 
 ![](https://i.imgur.com/zMmZKuL.png)
@@ -487,7 +564,7 @@ python api/manage.py migrate
 順便在建立一個 superuser
 
 ```cmd
-python api/manage.py createsuperuser
+python manage.py createsuperuser
 ```
 
 接著我們可以試著使用 GUI 介紹連接 db
@@ -496,7 +573,7 @@ python api/manage.py createsuperuser
 
 ![](https://i.imgur.com/2Hdt7wU.png)
 
-我們剛剛 migrate 的東西有存在
+我們剛剛 migrate 的東西確實有存在
 
 ![](https://i.imgur.com/PEUfGRy.png)
 
@@ -524,6 +601,8 @@ python api/manage.py createsuperuser
 
 ## 其他管理 Docker GUI 的工具
 
+youtube 教學影片準備中......
+
 除了 [Kitematic](https://kitematic.com/) 之外，還有其他不錯的推薦給大家，這次要介紹的就是
 
 [portainer](https://github.com/portainer/portainer) 功能強大又好用 :fire:
@@ -536,8 +615,16 @@ python api/manage.py createsuperuser
 
 ```cmd
 docker volume create portainer_data
-docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+docker run --name=portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 ```
+
+`-d` `-p` 在前面的 `docker run` 有介紹過代表的含意，`--name` 只是命名而已。
+
+`Note 1`: `The -v /var/run/docker.sock:/var/run/docker.sock option is available on Linux environments only.`
+
+`Note 2`: `The -v portainer_data:/data portainer/portainer option will persist Portainer data in portainer_data on the host where Portainer is running. You can specify another location on your filesystem.`
+
+（ 建立起來之後，就依照 container 的操作即可 ）
 
 之後查看 [http://localhost:9000/](http://localhost:9000/) 就會看到下圖
 
@@ -609,7 +696,7 @@ lsof -i tcp:5432
 
 Docker 算是我最近才開始接觸的，所以也算是新手，如果我有任何講錯的，歡迎和我說，我會再修改  :grinning:
 
-我發現 Docker 可以玩的真的很多，像是可以考慮建立一個 CI Server，用 Jenkins 所提供的各種服務，
+我發現 Docker 可以玩的真的很多，像是可以考慮建立一個 CI Server（ 用 Jenkins 所提供的各種服務 ），
 
 或是說也可以到 [Google Cloud Platform](https://cloud.google.com/?hl=zh-tw) 玩玩 Docker。
 
