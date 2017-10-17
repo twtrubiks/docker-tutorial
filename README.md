@@ -88,7 +88,7 @@ Feauture  | Containers                  |  Virtual Machines ( 傳統的虛擬�
 
 相信大家多多少少都遇過上面這些事情，我們可以透過 Docker 來解決這些問題，
 
-保持大家環境一致，而且要建立的時候也很快 :smile:。
+保持大家環境一致，而且要建立的時候也很快 :smile:
 
 #### 對於 DevOps 的好處
 
@@ -143,7 +143,7 @@ Windows
 接著如果你的電腦沒有啟用 [Hyper-V](https://msdn.microsoft.com/zh-tw/library/hh831531(v=ws.11).aspx) ，他會叫你重啟電腦
 (一樣，點下去就對惹)
 
-( 更多可 Hyper-V 介紹請參考[https://docs.microsoft.com/zh-tw/virtualization/hyper-v-on-windows/about/](https://docs.microsoft.com/zh-tw/virtualization/hyper-v-on-windows/about/) )
+( 更多可 Hyper-V 介紹請參考 [https://docs.microsoft.com/zh-tw/virtualization/hyper-v-on-windows/about/](https://docs.microsoft.com/zh-tw/virtualization/hyper-v-on-windows/about/) )
 
 ![](https://i.imgur.com/YG79VE1.jpg)
 
@@ -160,7 +160,13 @@ docker-compose --version
 
 ![](https://i.imgur.com/k1o3GIz.png)
 
+記得再設定一個東西 Shared Drives
+
+![](https://i.imgur.com/a6dqWU8.jpg)
+
 裝完了之後，建議大家再多裝一個 [Kitematic](https://kitematic.com/)，他是 GUI 介面的，方便你使用 Docker，
+
+( 後面會再介紹一個更贊的 GUI 介面 [portainer](https://github.com/portainer/portainer)  :grin: )
 
 我知道打指令很潮，但還是建議裝一下。
 
@@ -173,10 +179,6 @@ docker-compose --version
 下載回來直接解壓縮雙點擊即可使用
 
 ![](https://i.imgur.com/9zsU23B.png)
-
-記得再設定一個東西 Shared Drives
-
-![](https://i.imgur.com/a6dqWU8.jpg)
 
 MAC
 
@@ -214,11 +216,6 @@ docker ps
 docker ps -a
 ```
 
-停止運行中的 container
-（ container ID 寫幾個就可以了，和 Git 的概念是一樣的 ，
-
-不了解 Git 可以參考 [Git-Tutorials GIT基本使用教學](https://github.com/twtrubiks/Git-Tutorials)）
-
 新建並啟動 Container
 
 ```cmd
@@ -242,6 +239,10 @@ docker run -d -p 8080:80 my_image service nginx start
 ```cmd
 docker start [OPTIONS] CONTAINER [CONTAINER...]
 ```
+
+（ container ID 寫幾個就可以了，和 Git 的概念是一樣的 ，
+
+不了解 Git 可以參考 [Git-Tutorials GIT基本使用教學](https://github.com/twtrubiks/Git-Tutorials)）
 
 停止 Container
 
@@ -286,9 +287,9 @@ cat /etc/os-release
 docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 ```
 
-在這裡先解釋一下一個名詞，稱為 volume， volume 是 Docker 最推薦存放 persisting data（ 數據 ）的機制，
+接下來要介紹 Volume，Volume 是 Docker 最推薦存放 persisting data（ 數據 ）的機制，
 
-使用 volume 有下列優點
+使用 Volume 有下列優點
 
 * Volumes are easier to back up or migrate than bind mounts.
 * You can manage volumes using Docker CLI commands or the Docker API.
@@ -335,11 +336,11 @@ Compose 是定義和執行多 Container 管理的工具，不懂我在說什麼:
 
 所以說我們需要有 Compose 來管理這些，透過 `docker-compose.yml` ( YML 格式 ) 文件。
 
-`docker-compose.yml` ( YML 格式 ) 文件 的寫法可參考 [https://docs.docker.com/compose/compose-file/](https://docs.docker.com/compose/compose-file/)
+`docker-compose.yml` 的寫法可參考 [https://docs.docker.com/compose/compose-file/](https://docs.docker.com/compose/compose-file/)
 
 也可以直接參考官網範例 [https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples](https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples)
 
-Compose 的 Command-line 很多和 Docker 都是類似的
+Compose 的 Command-line 很多和 Docker 都是類似的，
 
 可參考 [https://docs.docker.com/glossary/?term=compose](https://docs.docker.com/glossary/?term=compose)
 
@@ -458,7 +459,8 @@ DATABASES = {
 }
 ```
 
-建議也將 `ALLOWED_HOSTS = []` 改為 `ALLOWED_HOSTS = ['*']` 。
+建議也將 `ALLOWED_HOSTS = []` 改為 `ALLOWED_HOSTS = ['*']`
+（ 這只是方便，實務上不會這樣使用 ）
 
 再來是兩個很重要的檔案，分別為 `Dockerfile` 和 `docker-compose.yml`
 
@@ -541,7 +543,7 @@ docker-compose up
 
 但你仔細看上圖，你會發現他說你還沒 migrate
 
-接下來我們開啟另一個 cmd 進入 web 的 service
+接下來我們開啟另一個 cmd 進入 web 的 service，
 
 透過剛剛介紹的指令進入 service
 
@@ -550,7 +552,7 @@ docker ps
 docker exec -it <Container ID> bash
 ```
 
-或是說也可以從 [Kitematic](https://kitematic.com/)進入
+或是說也可以從 [Kitematic](https://kitematic.com/) 進入，
 
 進入後我們可以開始 migrate
 
@@ -567,7 +569,7 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-接著我們可以試著使用 GUI 介紹連接 db
+接著我們可以試著使用 GUI 介紹連接 db，
 
 因為我們是用 [PostgreSQL](https://www.postgresql.org/)  ，可以透過 [pgadmin](https://www.pgadmin.org/) 連線
 
@@ -603,11 +605,13 @@ python manage.py createsuperuser
 
 youtube 教學影片準備中......
 
-除了 [Kitematic](https://kitematic.com/) 之外，還有其他不錯的推薦給大家，這次要介紹的就是
+除了 [Kitematic](https://kitematic.com/) 之外，還有其他不錯的推薦給大家，
 
-[portainer](https://github.com/portainer/portainer) 功能強大又好用 :fire:
+這次要介紹的就是 [portainer](https://github.com/portainer/portainer) 功能強大又好用 :fire:
 
-其他如果去看看 [Kitematic](https://github.com/docker/kitematic) 以及 [portainer](https://github.com/portainer/portainer) 的 github，你會發現 [portainer](https://github.com/portainer/portainer) 感覺比較有在 maintenance :smile:
+其實如果去看看 [Kitematic](https://github.com/docker/kitematic) 以及 [portainer](https://github.com/portainer/portainer) 的 github，
+
+你會發現 [portainer](https://github.com/portainer/portainer) 感覺比較有在 maintenance :smile:
 
 而且我使用了 [portainer](https://github.com/portainer/portainer) 之後，真心大推 :smiley:
 
@@ -620,9 +624,9 @@ docker run --name=portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/doc
 
 `-d` `-p` 在前面的 `docker run` 有介紹過代表的含意，`--name` 只是命名而已。
 
-`Note 1`: `The -v /var/run/docker.sock:/var/run/docker.sock option is available on Linux environments only.`
+`Note 1`: The -v /var/run/docker.sock:/var/run/docker.sock option is available on Linux environments only.
 
-`Note 2`: `The -v portainer_data:/data portainer/portainer option will persist Portainer data in portainer_data on the host where Portainer is running. You can specify another location on your filesystem.`
+`Note 2`: The -v portainer_data:/data portainer/portainer option will persist Portainer data in portainer_data on the host where Portainer is running. You can specify another location on your filesystem.
 
 （ 建立起來之後，就依照 container 的操作即可 ）
 
