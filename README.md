@@ -6,6 +6,7 @@
 
 * [Youtube Tutorial PART 1 - Docker 基本教學 - 從無到有 Docker-Beginners-Guide](https://youtu.be/Wg5m0-Jyox8)
 * [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](https://youtu.be/aZ6woJ7qekE)
+* [Youtube Tutorial PART 3 - Docker 基本教學 - 透過 portainer 管理  Docker](https://youtu.be/VZjHmBcEcew)
 
 ## 簡介
 
@@ -603,7 +604,7 @@ python manage.py createsuperuser
 
 ## 其他管理 Docker GUI 的工具
 
-youtube 教學影片準備中......
+* [Youtube Tutorial PART 3 - Docker 基本教學 - 透過 portainer 管理  Docker](https://youtu.be/VZjHmBcEcew)
 
 除了 [Kitematic](https://kitematic.com/) 之外，還有其他不錯的推薦給大家，
 
