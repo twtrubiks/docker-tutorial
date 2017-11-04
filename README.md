@@ -397,6 +397,14 @@ docker-compose down [options]
 
 `down` 這個功能也建議可以參考 [https://docs.docker.com/compose/reference/down/](https://docs.docker.com/compose/reference/down/)
 
+舉個例子
+
+```cmd
+docker-compose down -v
+```
+
+加個 `-v` 就會順便幫你把 volume 移除（ 移除你在 `docker-compose.yml` 裡面設定的 volume ）
+
 在指定的 Service 中執行一個指令
 
 ```cmd
