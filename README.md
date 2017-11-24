@@ -524,6 +524,22 @@ volumes:
 
 詳細可參考 [https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples](https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples)
 
+溫馨小提醒  :heart:
+
+可能有人會問為什麼我是使用 `0.0.0.0`，而不是使用 `127.0.0.1`:question::question:
+
+```cmd
+python manage.py runserver 0.0.0.0:8000
+```
+
+`127.0.0.1`，並不代表真正的 **本機**，我們經常認為他是本機是因為我們電腦的 `host` 預設都幫你設定好了:smirk:
+
+詳細的 `host` 設定教學可參考 [hosts-設定檔 以及 查詢內網 ip](https://github.com/twtrubiks/docker-django-nginx-uswgi-postgres-tutorial#hosts-設定檔-以及-查詢內網-ip)，
+
+`0.0.0.0` 才是真正的代表，**當下 ( 本 ) 網路中的本機** :pencil2:
+
+如果大家想更深入的了解，可 google 再進一步的了解 `127.0.0.1` 以及 `0.0.0.0` 的差異 :smile:
+
 設定完了之後，接下來我們就可以啟動他了
 
 ```cmd
