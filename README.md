@@ -7,6 +7,7 @@
 * [Youtube Tutorial PART 1 - Docker 基本教學 - 從無到有 Docker-Beginners-Guide](https://youtu.be/Wg5m0-Jyox8)
 * [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](https://youtu.be/aZ6woJ7qekE)
 * [Youtube Tutorial PART 3 - Docker 基本教學 - 透過 portainer 管理  Docker](https://youtu.be/VZjHmBcEcew)
+* [Youtube Tutorial PART 4 - Docker push image to Docker Hub 教學](xxx)
 
 ## 簡介
 
@@ -300,7 +301,7 @@ docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
 docker exec -it <Container ID> bash
 ```
 
-打指令比較潮，或是說你也可以透過 [Kitematic](https://kitematic.com/) 進入
+打指令比較潮，或是說你也可以透過 [Kitematic](https://kitematic.com/) 進入。
 
 [](https://i.imgur.com/Yui1UZb.png)
 
@@ -540,9 +541,9 @@ docker network disconnect [OPTIONS] NETWORK CONTAINER
 
 這個方法是官方推薦的 :thumbsup:
 
-透過內建的 DNS 伺服器，可以直接使用容器名稱，就可解析出 IP，不需要再使用 IP 讓容器互
+透過內建的 DNS 伺服器，可以直接使用容器名稱，就可解析出 IP，不需要再使用 IP 讓容器互相
 
-相溝通，我們只需要知道容器的名稱就可以連接到容器。
+溝通，我們只需要知道容器的名稱就可以連接到容器。
 
 更多詳細資料可參考 [https://docs.docker.com/engine/userguide/networking/#user-defined-networks](https://docs.docker.com/engine/userguide/networking/#user-defined-networks)
 
@@ -684,6 +685,84 @@ Pushes images 到 docker hub
 ```cmd
 docker-compose push
 ```
+
+可參考 [https://docs.docker.com/compose/reference/push/](https://docs.docker.com/compose/reference/push/)
+
+## Docker Registry
+
+![](https://i.imgur.com/uAXUtxT.png)
+
+可以把它想成是一個類似 github 的地方，只不過裡面變成是存 docker 的東西，當然，
+
+也可以自己架，但會有一些額外的成本，像是網路，維護等等，這部分就要自己衡量了:grinning:
+
+接下來將大家如何將 image push 到 Docker Registry :smiley:
+
+* [Youtube Tutorial PART 4 - Docker push image to Docker Hub 教學](xxx)
+
+首先，先登入 [Docker Registry](https://hub.docker.com/)  ( 註冊流程很簡單，我就跳過了 )
+
+```cmd
+docker login
+```
+
+![](https://i.imgur.com/lm9GWTj.png)
+
+舉個例子，先 run 一個 busybox 的容器
+
+```cmd
+docker run -it busybox
+```
+
+接著在裡面新增一筆資料
+
+```cmd
+ echo 'text' > data.txt
+```
+
+![](https://i.imgur.com/KCeZGQh.png)
+
+然後打開另一個 terminal ，使用 `docker ps` 查看目前容器的 id
+
+![](https://i.imgur.com/mBIhGBW.png)
+
+再來使用像 git 一樣的方式 commit
+
+docker commit
+
+```cmd
+docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+```
+
+可參考 [https://docs.docker.com/engine/reference/commandline/commit/](https://docs.docker.com/engine/reference/commandline/commit/)
+
+```cmd
+docker commit -m "test" 4fb4ef51e917 twtrubiks/my_busybox
+```
+
+`-m` commit message ，和 git 一樣。
+
+twtrubiks/my_busybox 則為我們定義的 REPOSITORY。
+
+這時候可以用 `docker images` 查看
+
+![](https://i.imgur.com/R548ail.png)
+
+最後 push
+
+```cmd
+docker push twtrubiks/my_busybox
+```
+
+![](https://i.imgur.com/2ExgYpB.png)
+
+docker 是一層一層的概念，他只會 push 自己新增的幾層上去而已，
+
+所以不用擔心整個 image 很大，要上傳很久 :relaxed:
+
+最後可以到 [https://hub.docker.com/](https://hub.docker.com/) 確認是否有成功 :smile:
+
+![](https://i.imgur.com/W5P3YQL.png)
 
 ## 用 Docker 實戰 Django 以及 Postgre
 
