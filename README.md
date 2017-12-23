@@ -14,6 +14,8 @@
 
 ![](https://i.imgur.com/gDcSwcs.png)
 
+***Containers as a Service ( CaaS ) - 容器如同服務***
+
 算是近幾年才開始紅的技術，蠻多公司都有使用 Docker，而且真的很方便，值得大家去了解一下 :smile:
 
 如果你有環境上不統一的問題？ 請用 Docker :smile:
@@ -199,6 +201,20 @@ Docker 的指令真的很多，這裡就介紹我比較常用的或是實用的�
 docker images
 ```
 
+建立 image
+
+```cmd
+docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
+```
+
+詳細的參數可參考 [https://docs.docker.com/engine/reference/commandline/create/](https://docs.docker.com/engine/reference/commandline/create/)
+
+範例 ( 建立一個名稱為  busybox 的 image )
+
+```cmd
+docker create -it --name busybox busybox
+```
+
 刪除 Image
 
 ```cmd
@@ -226,12 +242,22 @@ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 舉個例子
 
 ```cmd
-docker run -d -p 8080:80 my_image service nginx start
+docker run -d -p 80:80 --name my_image nginx
 ```
 
-`-d` 代表在 Detached（ 背景 ）執行，如不加`-d`，預設會 foreground ( 前景 ) 執行
+`-d` 代表在 Detached（ 背景 ）執行，如不加 `-d`，預設會 foreground ( 前景 ) 執行
 
 `-p` 代表將本機的 8080 port 的所有流量轉發到 container 中的 80 port
+
+`--name` 設定 container 的名稱
+
+在舉一個例子
+
+```cmd
+ docker run -it --rm busybox
+```
+
+`--rm` 代表當 exit container 時，會自動移除 container。 ( incompatible with -d )
 
 更詳細的可參考 [https://docs.docker.com/engine/reference/run/](https://docs.docker.com/engine/reference/run/)
 
@@ -263,6 +289,10 @@ docker restart [OPTIONS] CONTAINER [CONTAINER...]
 docker rm [OPTIONS] CONTAINER [CONTAINER...]
 ```
 
+`--volumes , -v` 加上這個參數，會移除掉連接到這個 container 的 volume。
+
+可參考 [https://docs.docker.com/engine/reference/commandline/rm/](https://docs.docker.com/engine/reference/commandline/rm/)
+
 進入 Container
 
 ```cmd
@@ -287,6 +317,113 @@ cat /etc/os-release
 ```cmd
 docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 ```
+
+查看 log
+
+```cmd
+docker logs [OPTIONS] CONTAINER
+```
+
+`--follow` , `-f`  ,  Follow log output
+
+更詳細的可參考 [https://docs.docker.com/engine/reference/commandline/logs/](https://docs.docker.com/engine/reference/commandline/logs/)
+
+顯示容器資源 ( CPU , I/O ...... )
+
+```cmd
+docker stats [OPTIONS] [CONTAINER...]
+```
+
+停止指定的 CONTAINER 中全部的 **processes**
+
+```cmd
+docker pause CONTAINER [CONTAINER...]
+```
+
+執行 `docker pause` 之後，可以試這用 `docker ps` 查看，會發現
+
+還是有在執行，這裡拿  `docker stop`  比較一下，差異如下。
+
+ `docker stop` : process 級別。
+
+ `docker pause`: container 級別。
+
+恢復指定暫停的 CONTAINER 中全部的 **processes**
+
+```cmd
+docker unpause CONTAINER [CONTAINER...]
+```
+
+docker tag
+
+```cmd
+docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+```
+
+範例
+
+```cmd
+docker tag 0e5574283393 twtrubiks/nginx:version1.0
+```
+
+更多可參考 [https://docs.docker.com/engine/reference/commandline/tag/](https://docs.docker.com/engine/reference/commandline/tag/)
+
+儲存 image 成  tar 檔案
+
+```cmd
+docker save [OPTIONS] IMAGE [IMAGE...]
+```
+
+範例
+
+```cmd
+docker save busybox > busybox.tar
+```
+
+更多可參考 [https://docs.docker.com/engine/reference/commandline/save/](https://docs.docker.com/engine/reference/commandline/save/)
+
+載入 image
+
+```cmd
+docker load [OPTIONS]
+```
+
+範例
+
+```cmd
+docker load < busybox.tar
+```
+
+更多可參考 [https://docs.docker.com/engine/reference/commandline/load/](https://docs.docker.com/engine/reference/commandline/load/)
+
+顯示 image 的 history，查詢 image 的每一層
+
+```cmd
+docker history [OPTIONS] IMAGE
+```
+
+在 docker 中，一層一層的概念很重要。
+
+![](https://i.imgur.com/NmImVby.png)
+
+更多可參考 [https://docs.docker.com/engine/reference/commandline/history/](https://docs.docker.com/engine/reference/commandline/history/)
+
+其他指令
+
+刪除所有 dangling images
+
+```cmd
+docker rmi $(docker images -q -f dangling=true)
+docker rmi $(docker images  --quiet --filter dangling=true)
+```
+
+停止所有正在運行的 Container
+
+```cmd
+docker stop $(docker ps -q)
+```
+
+### Volume
 
 接下來要介紹 Volume，Volume 是 Docker 最推薦存放 persisting data（ 數據 ）的機制，
 
@@ -326,6 +463,90 @@ docker volume create [OPTIONS] [VOLUME]
 ```cmd
 docker volume rm [OPTIONS] VOLUME [VOLUME...]
 ```
+
+查看 volume 詳細資料
+
+```cmd
+docker volume inspect [OPTIONS] VOLUME [VOLUME...]
+```
+
+移除全部未使用的 volume
+
+```cmd
+docker volume prune [OPTIONS]
+```
+
+### network
+
+建議大家花點時間研究 docker 中的 network，會蠻有幫助的 :smiley:
+
+查看目前 docker 的網路清單
+
+```cmd
+docker network ls [OPTIONS]
+```
+
+詳細可參考 [https://docs.docker.com/engine/userguide/networking/](https://docs.docker.com/engine/userguide/networking/)
+
+docker 中的網路主要有三種 Bridge、Host、None，預設皆為 Bridge 模式。
+
+指定 network 範例 ( 指定使用  `host` 網路 )
+
+```cmd
+docker run -it --name busybox --rm --network=host busybox
+```
+
+建立 network
+
+```cmd
+docker network create [OPTIONS] NETWORK
+```
+
+移除 network
+
+```cmd
+docker network rm NETWORK [NETWORK...]
+```
+
+移除全部未使用的 network
+
+```cmd
+docker network prune [OPTIONS]
+```
+
+查看 network 詳細資料
+
+```cmd
+docker network inspect [OPTIONS] NETWORK [NETWORK...]
+```
+
+將 container 連接 network
+
+```cmd
+docker network connect [OPTIONS] NETWORK CONTAINER
+```
+
+更多詳細資料可參考 [https://docs.docker.com/engine/reference/commandline/network_connect/](https://docs.docker.com/engine/reference/commandline/network_connect/)
+
+Disconnect container  network
+
+```cmd
+docker network disconnect [OPTIONS] NETWORK CONTAINER
+```
+
+更多詳細資料可參考 [https://docs.docker.com/engine/reference/commandline/network_disconnect/](https://docs.docker.com/engine/reference/commandline/network_disconnect/)
+
+#### User-defined networks
+
+這個方法是官方推薦的 :thumbsup:
+
+透過內建的 DNS 伺服器，可以直接使用容器名稱，就可解析出 IP，不需要再使用 IP 讓容器互
+
+相溝通，我們只需要知道容器的名稱就可以連接到容器。
+
+更多詳細資料可參考 [https://docs.docker.com/engine/userguide/networking/#user-defined-networks](https://docs.docker.com/engine/userguide/networking/#user-defined-networks)
+
+## docker-compose
 
 再來要介紹 docker-compose，可參考官網 [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
 
@@ -422,25 +643,46 @@ docker-compose run web bash
 
 可參考 [https://docs.docker.com/compose/reference/run/](https://docs.docker.com/compose/reference/run/)
 
- 觀看 Service logs
+觀看 Service logs
 
 ```cmd
 docker-compose logs [options] [SERVICE...]
 ```
 
-其他指令
-
-刪除所有 dangling images
+檢查 `docker-compose.yml` 格式是否正確
 
 ```cmd
-docker rmi $(docker images -q -f dangling=true)
-docker rmi $(docker images  --quiet --filter dangling=true)
+docker-compose config
 ```
 
-停止所有正在運行的 Container
+如下指令，和 `docker exec` 一樣
 
 ```cmd
-docker stop $(docker ps -q)
+docker-compose exec
+```
+
+範例 ( 進入 web 這個 service 的 bash )
+
+```cmd
+docker-compose exec web bash
+```
+
+顯示被使用到的 container 中的 images 清單
+
+```cmd
+docker-compose images
+```
+
+移除  service containers
+
+```cmd
+docker-compose rm
+```
+
+Pushes images 到 docker hub
+
+```cmd
+docker-compose push
 ```
 
 ## 用 Docker 實戰 Django 以及 Postgre
@@ -524,7 +766,7 @@ volumes:
 
 詳細可參考 [https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples](https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples)
 
-溫馨小提醒  :heart:
+溫馨小提醒 1  :heart:
 
 可能有人會問為什麼我是使用 `0.0.0.0`，而不是使用 `127.0.0.1`:question::question:
 
@@ -539,6 +781,40 @@ python manage.py runserver 0.0.0.0:8000
 `0.0.0.0` 才是真正的代表，**當下 ( 本 ) 網路中的本機** :pencil2:
 
 如果大家想更深入的了解，可 google 再進一步的了解 `127.0.0.1` 以及 `0.0.0.0` 的差異 :smile:
+
+溫馨小提醒 2  :heart:
+
+`docker-compose.yml` 其實使用 `docker run` 也是可以完成的，例如這個範例中，如果使用
+
+`docker run` 來寫，會變成這樣。
+
+首先，為了讓容器彼此可以溝通，我們先建立一個網路 ( User-defined networks )，
+
+```cmd
+docker network create my_network
+```
+
+db 容器
+
+```cmd
+docker run --name db -v pgdata:/var/lib/postgresql/data/ -p 5432:5432 --network=my_network -e POSTGRES_PASSWORD=password123 postgres
+```
+
+接下來先去 api 資料夾中 build 出 image
+
+```cmd
+docker build --tag web_image .
+```
+
+`--tag , -t` , tag 這個 image 名稱為 web_image
+
+web 容器
+
+```cmd
+docker run --name web -v api_data:/docker_api -p 8000:8000 --network=my_network --restart always web_image python manage.py runserver 0.0.0.0:8000
+```
+
+以上這樣，和 `docker-compose.yml`  其實是一樣的:open_mouth:
 
 設定完了之後，接下來我們就可以啟動他了
 
