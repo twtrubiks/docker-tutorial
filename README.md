@@ -7,7 +7,7 @@
 * [Youtube Tutorial PART 1 - Docker 基本教學 - 從無到有 Docker-Beginners-Guide](https://youtu.be/Wg5m0-Jyox8)
 * [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](https://youtu.be/aZ6woJ7qekE)
 * [Youtube Tutorial PART 3 - Docker 基本教學 - 透過 portainer 管理  Docker](https://youtu.be/VZjHmBcEcew)
-* [Youtube Tutorial PART 4 - Docker push image to Docker Hub 教學](xxx)
+* [Youtube Tutorial PART 4 - Docker push image to Docker Hub 教學](https://youtu.be/dVBKwmqO5e4)
 
 ## 簡介
 
@@ -696,9 +696,9 @@ docker-compose push
 
 也可以自己架，但會有一些額外的成本，像是網路，維護等等，這部分就要自己衡量了:grinning:
 
-接下來將大家如何將 image push 到 Docker Registry :smiley:
+接下來教大家如何將 image push 到 Docker Registry :smiley:
 
-* [Youtube Tutorial PART 4 - Docker push image to Docker Hub 教學](xxx)
+* [Youtube Tutorial PART 4 - Docker push image to Docker Hub 教學](https://youtu.be/dVBKwmqO5e4)
 
 首先，先登入 [Docker Registry](https://hub.docker.com/)  ( 註冊流程很簡單，我就跳過了 )
 
