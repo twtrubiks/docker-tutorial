@@ -1080,9 +1080,17 @@ lsof -i tcp:5432
 
 Docker 算是我最近才開始接觸的，所以也算是新手，如果我有任何講錯的，歡迎和我說，我會再修改  :grinning:
 
-我發現 Docker 可以玩的真的很多，像是可以考慮建立一個 CI Server（ 用 Jenkins 所提供的各種服務 ），
+Docker 可以玩的真的很多，延伸參考
 
-或是說也可以到 [Google Cloud Platform](https://cloud.google.com/?hl=zh-tw) 玩玩 Docker。
+* [實戰 Docker + Jenkins + Django + Postgres 📝](https://github.com/twtrubiks/docker-jenkins-django-tutorial) - 結合 Jenkins
+
+* [Docker + Django + Nginx + uWSGI + Postgres 基本教學 - 從無到有](https://github.com/twtrubiks/docker-django-nginx-uwsgi-postgres-tutorial)
+
+* [實戰 Docker + Django + Nginx + uWSGI + Postgres - Load Balance 📝](https://github.com/twtrubiks/docker-django-nginx-uwsgi-postgres-load-balance-tutorial)
+
+也可以再玩玩 **Docker Swarm** ( 分散式系統 ) :satisfied:
+
+* [Docker Swarm 基本教學 - 從無到有 Docker-Swarm-Beginners-Guide📝](https://github.com/twtrubiks/docker-swarm-tutorial)
 
 最後，希望大家在學習 Docker 的過程中，遇到不懂的，可以去找資料並且了解他，
 順便補足一些之前不足的知識。
