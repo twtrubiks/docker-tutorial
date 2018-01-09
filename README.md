@@ -686,7 +686,9 @@ Pushes images 到 docker hub
 docker-compose push
 ```
 
-可參考 [https://docs.docker.com/compose/reference/push/](https://docs.docker.com/compose/reference/push/)
+目前這個指令其實我也搞不太懂，可參考 [https://github.com/docker/compose/issues/4283](https://github.com/docker/compose/issues/4283)
+
+官網也解釋的沒有很清楚 [https://docs.docker.com/compose/reference/push/](https://docs.docker.com/compose/reference/push/)
 
 ## Docker Registry
 
