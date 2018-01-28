@@ -865,6 +865,22 @@ python manage.py runserver 0.0.0.0:8000
 
 溫馨小提醒 2  :heart:
 
+這邊要特別提一下 `depends_on` 這個參數，
+
+詳細可參考 [https://docs.docker.com/compose/compose-file/#depends_on](https://docs.docker.com/compose/compose-file/#depends_on)，
+
+上面連結中有一段說明很值得看
+
+****depends_on does not wait for db and redis to be 「ready」 before starting web - only until they have been started. If you need to wait for a service to be ready, see Controlling startup order for more on this problem and strategies for solving it.****
+
+以我的 [docker-compose.yml](https://github.com/twtrubiks/docker-tutorial/blob/master/docker-compose.yml) 為例，啟動順序雖然為 db -> web，**但他不會等待 db 啟動完成後才啟動 web**，
+
+也就是說，還是有可能 **web 比 db 先啟動完成**，這樣就需要重啟 web service，否則會無法連上 db :sob:
+
+如果真的要控制啟動順序，請參考 [Controlling startup order](https://docs.docker.com/compose/startup-order/)。
+
+溫馨小提醒 3  :heart:
+
 `docker-compose.yml` 其實使用 `docker run` 也是可以完成的，例如這個範例中，如果使用
 
 `docker run` 來寫，會變成這樣。
