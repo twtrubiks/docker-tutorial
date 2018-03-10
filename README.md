@@ -1040,7 +1040,7 @@ docker run --name=portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/doc
 
 畫面真的不錯看，而且資訊也很豐富 :heart_eyes:
 
-![](https://i.imgur.com/UOabLoZ.png)
+![](https://i.imgur.com/ynoqTZT.png)
 
 相信我，你使用完他之後，你會默默的邊緣化 [Kitematic](https://kitematic.com/) :smirk:
 
