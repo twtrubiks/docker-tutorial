@@ -248,7 +248,7 @@ docker run -d -p 80:80 --name my_image nginx
 
 `-d` 代表在 Detached（ 背景 ）執行，如不加 `-d`，預設會 foreground ( 前景 ) 執行
 
-`-p` 代表將本機的 8080 port 的所有流量轉發到 container 中的 80 port
+`-p` 代表將本機的 80 port 的所有流量轉發到 container 中的 80 port
 
 `--name` 設定 container 的名稱
 
