@@ -414,15 +414,32 @@ docker history [OPTIONS] IMAGE
 刪除所有 dangling images
 
 ```cmd
-docker rmi $(docker images -q -f dangling=true)
-docker rmi $(docker images  --quiet --filter dangling=true)
+docker image prune
 ```
+
+移除全部 unused images (不只 dangling images)
+
+```cmd
+docker image prune -a
+```
+
+更多資訊可參考 [image_prune](https://docs.docker.com/engine/reference/commandline/image_prune/) 	
 
 停止所有正在運行的 Container
 
 ```cmd
-docker stop $(docker ps -q)
+docker container stop $(docker ps -q)
 ```
+
+更多資訊可參考 [container_stop](https://docs.docker.com/engine/reference/commandline/container_stop/)
+
+移除全部停止的 containers
+
+```cmd
+docker container prune
+```
+
+更多資訊可參考 [container_prune](https://docs.docker.com/engine/reference/commandline/container_prune/)
 
 ### Volume
 
