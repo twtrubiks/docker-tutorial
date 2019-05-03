@@ -450,7 +450,7 @@ docker image prune
 docker image prune -a
 ```
 
-更多資訊可參考 [image_prune](https://docs.docker.com/engine/reference/commandline/image_prune/) 	
+更多資訊可參考 [image_prune](https://docs.docker.com/engine/reference/commandline/image_prune/)
 
 停止所有正在運行的 Container
 
@@ -733,6 +733,68 @@ docker-compose push
 目前這個指令其實我也搞不太懂，可參考 [https://github.com/docker/compose/issues/4283](https://github.com/docker/compose/issues/4283)
 
 官網也解釋的沒有很清楚 [https://docs.docker.com/compose/reference/push/](https://docs.docker.com/compose/reference/push/)
+
+### docker-compose networks
+
+* [Youtube Tutorial - docker-compose networks 說明](https://youtu.be/wmV9WfkpyGk)
+
+這邊多補充 docker-compose networks 的觀念，因為剛好最近有用到:smile:
+
+```yml
+version: '3.5'
+services:
+
+    db:
+      container_name: 'postgres'
+      image: postgres
+      environment:
+        POSTGRES_PASSWORD: password123
+      ports:
+        - "5432:5432"
+        # (HOST:CONTAINER)
+      volumes:
+        - pgdata:/var/lib/postgresql/data/
+      networks:
+        - proxy
+
+    web:
+      build: ./api
+      command: python manage.py runserver 0.0.0.0:8000
+      restart: always
+      volumes:
+        - api_data:/docker_api
+        # (HOST:CONTAINER)
+      ports:
+        - "8000:8000"
+        # (HOST:CONTAINER)
+      depends_on:
+        - db
+      networks:
+        - proxy
+
+volumes:
+    api_data:
+    pgdata:
+
+networks:
+    proxy:
+      # external:
+        name: my_network
+```
+
+先把 version 改成 3.5，因為這版本才開始有 networks name 的概念，在
+
+db 以及 web 中都加了 networks ( 自己定義的 )，定義的地方在最後面，
+
+proxy 是名稱 ( 類似 volumes 的概念 )，`external` option 的意思代表
+
+是不是要參考外部別人已經定義好的 network ( 所以如果找不到就會報錯 )，
+
+但如果不加上 `external` option，也就代表是自己定義的，會幫你自動建立
+
+你所定義的 network，名稱為 my_network。
+
+如果你都完全沒有定義 networks，預設就是資料夾的名稱_default 。
 
 ## Docker Registry
 

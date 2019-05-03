@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
 
     db:
@@ -11,6 +11,8 @@ services:
         # (HOST:CONTAINER)
       volumes:
         - pgdata:/var/lib/postgresql/data/
+      networks:
+        - proxy
 
     web:
       build: ./api
@@ -24,7 +26,14 @@ services:
         # (HOST:CONTAINER)
       depends_on:
         - db
+      networks:
+        - proxy
 
 volumes:
     api_data:
     pgdata:
+
+networks:
+    proxy:
+      # external:
+        name: my_network
