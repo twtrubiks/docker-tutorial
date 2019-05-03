@@ -369,16 +369,29 @@ docker tag 0e5574283393 twtrubiks/nginx:version1.0
 
 更多可參考 [https://docs.docker.com/engine/reference/commandline/tag/](https://docs.docker.com/engine/reference/commandline/tag/)
 
-儲存 image 成  tar 檔案
+儲存 (備份) image 成 tar 檔案
 
 ```cmd
-docker save [OPTIONS] IMAGE [IMAGE...]
+
+[OPTIONS] IMAGE [IMAGE...]
 ```
 
 範例
 
 ```cmd
 docker save busybox > busybox.tar
+```
+
+或
+
+```cmd
+docker save --output busybox.tar busybox
+```
+
+或 ( 也可以一次備份多個 )
+
+```cmd
+docker save -o images.tar postgres:9.6 busybox
 ```
 
 更多可參考 [https://docs.docker.com/engine/reference/commandline/save/](https://docs.docker.com/engine/reference/commandline/save/)
@@ -395,6 +408,12 @@ docker load [OPTIONS]
 docker load < busybox.tar
 ```
 
+或
+
+```cmd
+docker load -i busybox.tar
+```
+
 更多可參考 [https://docs.docker.com/engine/reference/commandline/load/](https://docs.docker.com/engine/reference/commandline/load/)
 
 顯示 image 的 history，查詢 image 的每一層
@@ -408,6 +427,14 @@ docker history [OPTIONS] IMAGE
 ![](https://i.imgur.com/NmImVby.png)
 
 更多可參考 [https://docs.docker.com/engine/reference/commandline/history/](https://docs.docker.com/engine/reference/commandline/history/)
+
+剛剛有教大家如何儲存 (備份) images， 載入 images，
+
+還有另外一種是 export 和 import containers，
+
+docker export container 請參考 [https://docs.docker.com/engine/reference/commandline/export/](https://docs.docker.com/engine/reference/commandline/export/)。
+
+docker import container 請參考 [https://docs.docker.com/engine/reference/commandline/import/](https://docs.docker.com/engine/reference/commandline/import/)。
 
 其他指令
 
