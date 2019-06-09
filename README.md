@@ -655,6 +655,14 @@ docker-compose up -d
 
 `up` 這個功能很強大，建議可以參考 [https://docs.docker.com/compose/reference/up/](https://docs.docker.com/compose/reference/up/)
 
+如果你希望每次都重新 build image，可以加上
+
+`--build` ( Build images before starting containers. )
+
+```cmd
+docker-compose up -d --build
+```
+
 docker-compose down
 
 ```cmd
