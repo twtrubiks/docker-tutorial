@@ -1,3 +1,5 @@
 django<2.0
 psycopg2
-djangorestframework
+
+# https://www.django-rest-framework.org/community/3.8-announcement/#deprecations
+djangorestframework==3.8.1
