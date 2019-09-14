@@ -268,9 +268,19 @@ docker run -d -p 80:80 --name my_image nginx
 docker start [OPTIONS] CONTAINER [CONTAINER...]
 ```
 
+如果想讓他在前景跑順便觀看輸出 , 可以使用以下指令
+
+```cmd
+docker start -a [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+`--attach` 或 `-a` 代表 Attach STDOUT/STDERR and forward signals.
+
+更詳細的可參考 [https://docs.docker.com/engine/reference/commandline/start/](https://docs.docker.com/engine/reference/commandline/start/)
+
 （ container ID 寫幾個就可以了，和 Git 的概念是一樣的 ，
 
-不了解 Git 可以參考 [Git-Tutorials GIT基本使用教學](https://github.com/twtrubiks/Git-Tutorials)）
+不了解 Git 可以參考 [Git-Tutorials GIT基本使用教學](https://github.com/twtrubiks/Git-Tutorials) ）
 
 停止 Container
 
@@ -859,6 +869,14 @@ docker commit -m "test" 4fb4ef51e917 twtrubiks/my_busybox
 `-m` commit message ，和 git 一樣。
 
 twtrubiks/my_busybox 則為我們定義的 REPOSITORY。
+
+如果需要 tag , 也可以增加
+
+```cmd
+docker commit -m "test" 4fb4ef51e917 twtrubiks/my_busybox:v1
+```
+
+（ 如果沒定義 tag , 則會顯示 latest ）
 
 這時候可以用 `docker images` 查看
 
