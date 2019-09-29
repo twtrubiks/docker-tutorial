@@ -814,6 +814,73 @@ proxy 是名稱 ( 類似 volumes 的概念 )，`external` option 的意思代表
 
 如果你都完全沒有定義 networks，預設就是資料夾的名稱_default 。
 
+### docker-compose ports 和 expose 差異
+
+在 docker-compose 中有兩種方法可以暴露容器 ports，
+
+分別是 ports 和 expose，
+
+#### ports
+
+```yml
+...
+ports:
+  - "5000:5000"  # 绑定 container 中的 5000 port 到 本機(HOST) 的 5000 port
+  # (HOST:CONTAINER)
+
+  - "5001:5000"  # 绑定 container 中的 5000 port 到 本機(HOST) 的 5001 port
+
+  - "5000"       # 绑定 container 中的 5000 port 到本機的任意 port (本機會隨機被分配到一個 port)
+...
+```
+
+隨機 port 範例，
+
+這邊使用 dpage/pgadmin4 這個 images 來示範，
+
+```cmd
+docker run -p 80 \
+    -e "PGADMIN_DEFAULT_EMAIL=xxxrubiks@gmail.com" \
+    -e "PGADMIN_DEFAULT_PASSWORD=SuperSecret" \
+    -d dpage/pgadmin4
+```
+
+如果我們執行兩次以上指令，你會發現本機被分配到兩個隨機的 ports (如下圖)，
+
+![alt tag](https://i.imgur.com/kkcnuJI.png)
+
+本機被隨機分配到 32768 以及 32769 port，
+
+這邊不管我們怎麼設定 ports，這些 ports 都會暴露給本機 (HOST) 以及其他 containers，這點很重要:exclamation::exclamation:
+
+也就是說，如果本機 5001 ports 被使用了，其他的 containers 就無法使用 5001 ports，
+
+可能要改成5002 ports 之類的。
+
+#### expoese
+
+```yml
+...
+expose:
+  - "4000"
+  - "6000"
+...
+```
+
+expose 是將 port 暴露給其他容器。
+
+expose 和 ports 最大的差別就是在 expose 不會暴露 port 給本機(HOST)，
+
+所以 本機(HOST)絕對無法被訪問，但 containers 內可以被訪問，
+
+所以說如果今天你的容器想要在 本機(HOST) 被訪問，一定要使用 ports 方式。
+
+***ports 和 expose 差異***
+
+簡單說，就是 ports 可以被 本機(HOST) 和 containers 訪問 ; 而
+
+expose 是本機(HOST) 無法被訪問，只有在 containers 中可以被訪問。
+
 ## Docker Registry
 
 ![](https://i.imgur.com/uAXUtxT.png)
