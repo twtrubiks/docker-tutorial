@@ -1104,6 +1104,12 @@ docker build --tag web_image .
 
 `--tag , -t` , tag 這個 image 名稱為 web_image
 
+也可以是
+
+```cmd
+docker build -t user/repo:tag .
+```
+
 web 容器
 
 ```cmd
@@ -1293,6 +1299,10 @@ sudo lsof -t -i tcp:8000 | xargs kill -9
 lsof -i tcp:5432
 ```
 
+## 在 Linux 中自動啟動 docker
+
+[在 Linux 中自動啟動 docker](https://github.com/twtrubiks/docker-tutorial/tree/master/docker-auto-run-linux)
+
 ## 後記：
 
 Docker 算是我最近才開始接觸的，所以也算是新手，如果我有任何講錯的，歡迎和我說，我會再修改  :grinning:
@@ -1327,9 +1337,21 @@ Docker 可以玩的真的很多，延伸參考
 
 文章都是我自己研究內化後原創，如果有幫助到您，也想鼓勵我的話，歡迎請我喝一杯咖啡:laughing:
 
+綠界科技ECPAY ( 不需註冊會員 )
+
+![alt tag](https://payment.ecpay.com.tw/Upload/QRCode/201906/QRCode_672351b8-5ab3-42dd-9c7c-c24c3e6a10a0.png)
+
+[贊助者付款](http://bit.ly/2F7Jrha)
+
+歐付寶 ( 需註冊會員 )
+
 ![alt tag](https://i.imgur.com/LRct9xa.png)
 
 [贊助者付款](https://payment.opay.tw/Broadcaster/Donate/9E47FDEF85ABE383A0F5FC6A218606F8)
+
+## 贊助名單
+
+[贊助名單](https://github.com/twtrubiks/Thank-you-for-donate)
 
 ## License
 
