@@ -190,6 +190,44 @@ MAC 我本身也有，但因為更早之前就裝了，步驟就沒記錄了，�
 
 [https://www.docker.com/docker-mac](https://www.docker.com/docker-mac)
 
+Linux
+
+[Youtube Tutorial-Ubuntu(Linux) 如何安裝 docker](https://youtu.be/eS_HMBC_RaA)
+
+這裡使用 Ubuntu 當作範例,
+
+雖然在 ubuntu 中有 `snap` 可以非常快速的安裝 docker,
+
+但在這邊我們不使用 `snap` 的方法安裝:smile:
+
+請參考官方文件步驟安裝,
+
+Get Docker Engine - Community for Ubuntu
+
+[Get Docker Engine - Community for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+
+安裝後步驟 (optional:exclamation:), 但建議參考一下
+
+[Post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/)
+
+docker-compose 的安裝
+
+[docker-compose install](https://docs.docker.com/compose/install/)
+
+系統資源分配問題,
+
+假如你是使用 windows 或是 mac 的 docker,
+
+你會有一個界面可以設定你要分多少的 cpu 以及 ram 給你的 docker,
+
+通常會在 Preferences -> Advanced, 有 GUI 界面,
+
+![](https://i.imgur.com/CWMQHxs.png)
+
+但如果是使用 linux, 就不會有這個界面, 因為在 Linux 中,
+
+會自動依照系統的資源進行分配.
+
 ## 指令介紹
 
 接著介紹一些 Docker 的指令，
