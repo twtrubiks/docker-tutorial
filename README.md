@@ -9,6 +9,13 @@
 * [Youtube Tutorial PART 3 - Docker 基本教學 - 透過 portainer 管理  Docker](https://youtu.be/VZjHmBcEcew)
 * [Youtube Tutorial PART 4 - Docker push image to Docker Hub 教學](https://youtu.be/dVBKwmqO5e4)
 
+其他說明
+
+* [Youtube Tutorial-Ubuntu(Linux) 如何安裝 docker](https://youtu.be/eS_HMBC_RaA)
+* [Youtube Tutorial-docker-compose networks 說明](https://youtu.be/wmV9WfkpyGk)
+* [Youtube Tutorial-docker-compose up/down 和 restart 的差異](https://youtu.be/nX-sbLPz-MU)
+* [Youtube Tutorial-Linux 教學-開機自動啟動 docker / compose](https://youtu.be/c4YIQHCDLnQ)
+
 ## 簡介
 
 [Docker](https://www.docker.com/)
@@ -376,6 +383,13 @@ docker logs [OPTIONS] CONTAINER
 `--follow` , `-f`  ,  Follow log output
 
 更詳細的可參考 [https://docs.docker.com/engine/reference/commandline/logs/](https://docs.docker.com/engine/reference/commandline/logs/)
+
+
+從最後 100 行開始追蹤,
+
+```cmd
+docker logs -f --tail 100 CONTAINER
+```
 
 顯示容器資源 ( CPU , I/O ...... )
 
@@ -789,6 +803,34 @@ docker-compose push
 目前這個指令其實我也搞不太懂，可參考 [https://github.com/docker/compose/issues/4283](https://github.com/docker/compose/issues/4283)
 
 官網也解釋的沒有很清楚 [https://docs.docker.com/compose/reference/push/](https://docs.docker.com/compose/reference/push/)
+
+### docker-compose up/down 和 restart 的差異
+
+* [Youtube Tutorial- docker-compose up/down 和 restart 的差異](https://youtu.be/nX-sbLPz-MU)
+
+先來談 `docker-compose up/down`,
+
+假如今天你修改了 `docker-compose.yml` 又或是更新了 image,
+
+當你要重建 docker , 有幾種方法,
+
+方法一.
+
+先停止 container, 執行 `docker-compose down` 再執行 `docker-compose up`.
+
+方法二.
+
+不需要停止 container, 直接執行 `docker-compose up -d`.
+
+(他會自動幫你重建, 很方便, 不需要多一步先關閉 container )
+
+結論, 只要你的 `docker-compose.yml` 有任何變動, 一定要執行 `docker-compose up` 才會生效.
+
+再來談 `docker-compose restart`,
+
+請看官方文件 [docker-compose restart](https://docs.docker.com/compose/reference/restart/), 如果你對 `docker-compose.yml` 修改, 然後使用這個指令, 是**不會**生效的,
+
+但是, 如果你是改 code (可能是 python code), 那這個指令是有效的.
 
 ### docker-compose networks
 
