@@ -15,6 +15,7 @@
 * [Youtube Tutorial-docker-compose networks 說明](https://youtu.be/wmV9WfkpyGk)
 * [Youtube Tutorial-docker-compose up/down 和 restart 的差異](https://youtu.be/nX-sbLPz-MU)
 * [Youtube Tutorial-Linux 教學-開機自動啟動 docker / compose](https://youtu.be/c4YIQHCDLnQ)
+* [Youtube Tutorial - Docker 基本教學 - 在 docker compose 中善用 Environment variables](https://youtu.be/JwbI1aNKbtY) - [Environment variables in Compose](https://github.com/twtrubiks/docker-tutorial/tree/master/docker-env-tutorial)
 
 ## 簡介
 
