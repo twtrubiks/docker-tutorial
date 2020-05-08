@@ -16,6 +16,7 @@
 * [Youtube Tutorial-docker-compose up/down 和 restart 的差異](https://youtu.be/nX-sbLPz-MU)
 * [Youtube Tutorial-Linux 教學-開機自動啟動 docker / compose](https://youtu.be/c4YIQHCDLnQ)
 * [Youtube Tutorial - Docker 基本教學 - 在 docker compose 中善用 Environment variables](https://youtu.be/JwbI1aNKbtY) - [Environment variables in Compose](https://github.com/twtrubiks/docker-tutorial/tree/master/docker-env-tutorial)
+* [Youtube Tutorial - 如何清除 Docker container log](https://youtu.be/SiG0tmwhqqg)
 
 ## 簡介
 
@@ -1383,6 +1384,56 @@ lsof -i tcp:5432
 ## 在 Linux 中自動啟動 docker
 
 [在 Linux 中自動啟動 docker](https://github.com/twtrubiks/docker-tutorial/tree/master/docker-auto-run-linux)
+
+## 如何清除 Docker container log
+
+[Youtube Tutorial - 如何清除 Docker container log](https://youtu.be/SiG0tmwhqqg)
+
+docker 的 container log 都會在 `/var/lib/docker/containers` 裡面
+
+( 前提是你使用官方的安裝方法, [Youtube Tutorial-Ubuntu(Linux) 如何安裝 docker](https://youtu.be/eS_HMBC_RaA))
+
+如果你是使用 `snap` 安裝 docker, 路徑則會在 `/var/snap/docker/common/var-lib-docker/containers`.
+
+![alt tag](https://i.imgur.com/sK5k4Iw.png)
+
+log 是一個 json 的檔案
+
+![alt tag](https://i.imgur.com/feSGmcm.png)
+
+如果你一直不去管他, log 就會越來越大:scream:
+
+以下狀況這個 log 會被清除, 就是修改了 `docker-compose.yml` 或是
+
+你執行了 `docker-compose down`, 這些 logs 都會被清除 (因為 containers 重新建立).
+
+(`docker-compose stop` 不受影響, 因為只是暫停而已)
+
+建立大家可參考 [docker-compose up/down 和 restart 的差異](https://github.com/twtrubiks/docker-tutorial#docker-compose-updown-%E5%92%8C-restart-%E7%9A%84%E5%B7%AE%E7%95%B0)
+
+那你可能會問我, 如果我很長一段時間都不會修改 `docker-compose.yml` 以及執行
+
+`docker-compose down` 該怎麼辦:sob: (因為 log 可能會長很快)
+
+這邊提供大家一個方法, 使用 linux 中的 truncate 指令(可參考 [ Linux 指令教學 - truncate](https://github.com/twtrubiks/linux-note#truncate))
+
+刪除全部 container 的 logs
+
+```cmd
+truncate -s 0 /var/lib/docker/containers/*/*-json.log
+```
+
+但是有時候只希望針對(清除)某個 container 的 logs, 這時候就可以使用以下的指令
+
+```cmd
+truncate -s 0 $(docker inspect --format='{{.LogPath}}' <container_name_or_id>)
+```
+
+(`container_name_or_id` 請換上自己 container 的 id 或 name)
+
+其中的 `docker inspect --format='{{.LogPath}}' <container_name_or_id>` 只是顯示路徑而已.
+
+![alt tag](https://i.imgur.com/TKCCdio.png)
 
 ## 後記：
 
