@@ -358,6 +358,13 @@ docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
 docker exec -it <Container ID> bash
 ```
 
+使用 root 使用者進入　
+
+```cmd
+docker exec -u 0 -it <Container ID> bash
+docker exec -u root -it <Container ID> bash
+```
+
 打指令比較潮，或是說你也可以透過 [Kitematic](https://kitematic.com/) 進入。
 
 [](https://i.imgur.com/Yui1UZb.png)
