@@ -5,18 +5,19 @@
  教你用 [Docker](https://www.docker.com/) 建立 [Django](https://github.com/django/django) + [PostgreSQL](https://www.postgresql.org/) 📝
 
 * [Youtube Tutorial PART 1 - Docker 基本教學 - 從無到有 Docker-Beginners-Guide](https://youtu.be/Wg5m0-Jyox8)
-* [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](https://youtu.be/aZ6woJ7qekE)
-* [Youtube Tutorial PART 3 - Docker 基本教學 - 透過 portainer 管理  Docker](https://youtu.be/VZjHmBcEcew)
-* [Youtube Tutorial PART 4 - Docker push image to Docker Hub 教學](https://youtu.be/dVBKwmqO5e4)
+* [目錄](https://github.com/twtrubiks/docker-tutorial#%E7%94%A8-docker-%E5%AF%A6%E6%88%B0-django-%E4%BB%A5%E5%8F%8A-postgre) - [Youtube Tutorial PART 2 - 用 Docker 實戰 Django 以及 Postgre](https://youtu.be/aZ6woJ7qekE)
+* [目錄](https://github.com/twtrubiks/docker-tutorial#%E5%85%B6%E4%BB%96%E7%AE%A1%E7%90%86-docker-gui-%E7%9A%84%E5%B7%A5%E5%85%B7) - [Youtube Tutorial PART 3 - Docker 基本教學 - 透過 portainer 管理  Docker](https://youtu.be/VZjHmBcEcew)
+* [目錄](https://github.com/twtrubiks/docker-tutorial#docker-registry) - [Youtube Tutorial PART 4 - Docker push image to Docker Hub 教學](https://youtu.be/dVBKwmqO5e4)
 
 其他說明
 
 * [Youtube Tutorial-Ubuntu(Linux) 如何安裝 docker](https://youtu.be/eS_HMBC_RaA)
-* [Youtube Tutorial-docker-compose networks 說明](https://youtu.be/wmV9WfkpyGk)
-* [Youtube Tutorial-docker-compose up/down 和 restart 的差異](https://youtu.be/nX-sbLPz-MU)
-* [Youtube Tutorial-Linux 教學-開機自動啟動 docker / compose](https://youtu.be/c4YIQHCDLnQ)
-* [Youtube Tutorial - Docker 基本教學 - 在 docker compose 中善用 Environment variables](https://youtu.be/JwbI1aNKbtY) - [Environment variables in Compose](https://github.com/twtrubiks/docker-tutorial/tree/master/docker-env-tutorial)
-* [Youtube Tutorial - 如何清除 Docker container log](https://youtu.be/SiG0tmwhqqg)
+* [目錄](https://github.com/twtrubiks/docker-tutorial#docker-compose-networks) - [Youtube Tutorial-docker-compose networks 說明](https://youtu.be/wmV9WfkpyGk)
+* [目錄](https://github.com/twtrubiks/docker-tutorial#docker-compose-updown-%E5%92%8C-restart-%E7%9A%84%E5%B7%AE%E7%95%B0) - [Youtube Tutorial-docker-compose up/down 和 restart 的差異](https://youtu.be/nX-sbLPz-MU)
+* [目錄](https://github.com/twtrubiks/docker-tutorial/tree/master/docker-auto-run-linux) - [Youtube Tutorial-Linux 教學-開機自動啟動 docker / compose](https://youtu.be/c4YIQHCDLnQ)
+* [目錄](https://github.com/twtrubiks/docker-tutorial/tree/master/docker-env-tutorial) - [Youtube Tutorial - Docker 基本教學 - 在 docker compose 中善用 Environment variables](https://youtu.be/JwbI1aNKbtY)
+* [目錄](https://github.com/twtrubiks/docker-tutorial#%E5%A6%82%E4%BD%95%E6%B8%85%E9%99%A4-docker-container-log) - [Youtube Tutorial - 如何清除 Docker container log](https://youtu.be/SiG0tmwhqqg)
+* [目錄](https://github.com/twtrubiks/docker-tutorial#json-file-logging-driver) - [Youtube Tutorial - Docker 中的 JSON File logging driver(container log)](https://youtu.be/wb9bONgnFn4)
 
 ## 簡介
 
@@ -1441,6 +1442,34 @@ truncate -s 0 $(docker inspect --format='{{.LogPath}}' <container_name_or_id>)
 其中的 `docker inspect --format='{{.LogPath}}' <container_name_or_id>` 只是顯示路徑而已.
 
 ![alt tag](https://i.imgur.com/TKCCdio.png)
+
+但還有一個更好的方法, 直接透過 docker 內的 JSON File logging driver.
+
+## JSON File logging driver
+
+[Youtube Tutorial - Docker 中的 JSON File logging driver(container log)](https://youtu.be/wb9bONgnFn4)
+
+在 docker 中 json-file driver 是默認的 default logging driver, 詳細可參考 [json-file](https://docs.docker.com/config/containers/logging/json-file/)
+
+所以我們可以透過這個設定限制 log 的大小,
+
+```yaml
+logging:
+  driver: "json-file"
+  options:
+    max-file: "1"    # default 是 1
+    max-size: "200m" # default 是 -1, 也就是沒有限制
+```
+
+設定完之後重新啟動 docker-compose, 可以使用以下的指令查看是否生效
+
+```cmd
+docker inspect --format '{{.HostConfig.LogConfig}}' CONTAINER
+```
+
+![alt tag](https://i.imgur.com/L6Z7bYX.png)
+
+這樣設定完之後, 就不用再擔心 container log 吃掉大量的容量了:smile:
 
 ## 後記：
 

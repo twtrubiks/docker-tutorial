@@ -13,6 +13,11 @@ services:
         - pgdata:/var/lib/postgresql/data/
       networks:
         - proxy
+      logging:
+        driver: "json-file"
+        options:
+          max-file: "1"    # default 是 1
+          max-size: "200m" # default 是 -1, 也就是沒有限制
 
     web:
       build: ./api
@@ -28,6 +33,11 @@ services:
         - db
       networks:
         - proxy
+      logging:
+        driver: "json-file"
+        options:
+          max-file: "1"    # default 是 1
+          max-size: "200m" # default 是 -1, 也就是沒有限制
 
 volumes:
     api_data:
