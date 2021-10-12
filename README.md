@@ -1088,7 +1088,7 @@ DATABASES = {
 `Dockerfile`
 
 ```text
-FROM python:3.6.2
+FROM python:3.8.12
 LABEL maintainer twtrubiks
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /docker_api
@@ -1493,7 +1493,7 @@ Docker 可以玩的真的很多，延伸參考
 ## 執行環境
 
 * Mac
-* Python 3.6.2
+* Python 3.8.12
 * windows 10
 
 ## Reference
