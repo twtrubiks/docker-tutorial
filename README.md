@@ -593,6 +593,31 @@ docker volume inspect [OPTIONS] VOLUME [VOLUME...]
 docker volume prune [OPTIONS]
 ```
 
+也可以建立 NFS volumes,
+
+`docker-compose.yml` 方法如下,
+
+```yml
+version: '3.5'
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - "nfs-data:/data"
+
+volumes:
+    nfs-data:
+      driver: local
+      driver_opts:
+        type: nfs
+        o: nfsvers=4,addr=ip,rw
+        device: ":/path/to/dir"
+```
+
+NFS 相關文章可參考 [linux-nfs-server - 如何在 ubuntu 啟用 NFS Server](https://github.com/twtrubiks/linux-note/tree/master/linux-nfs-server)
+
 ### network
 
 建議大家花點時間研究 docker 中的 network，會蠻有幫助的 :smiley:
