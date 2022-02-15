@@ -593,6 +593,38 @@ docker volume inspect [OPTIONS] VOLUME [VOLUME...]
 docker volume prune [OPTIONS]
 ```
 
+也可以建立 readonly 的 volumes (容器內 readonly)
+
+`docker-compose.yml` 方法如下,
+
+```yml
+version: '3.5'
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - "nfs-data:/data:ro,z"
+
+volumes:
+    nfs-data:
+```
+
+如果要可讀寫, 就設定 `rw`.
+
+volumes 在容器內的確不能寫 (只能讀)
+
+![alt tag](https://i.imgur.com/ve4572t.png)
+
+使用以下的指令查看 Mounts, 觀察它的 Mode
+
+```cmd
+docker inspect <container ID>
+```
+
+![alt tag](https://i.imgur.com/ex8A3Y5.png)
+
 也可以建立 NFS volumes,
 
 `docker-compose.yml` 方法如下,
@@ -615,6 +647,15 @@ volumes:
         o: nfsvers=4,addr=ip,rw
         device: ":/path/to/dir"
 ```
+
+可以用以下指令查看設定
+
+```cmd
+docker volume ls
+docker inspect <volume name>
+```
+
+![alt tag](https://i.imgur.com/8mzUGsg.png)
 
 NFS 相關文章可參考 [linux-nfs-server - 如何在 ubuntu 啟用 NFS Server](https://github.com/twtrubiks/linux-note/tree/master/linux-nfs-server)
 
