@@ -791,6 +791,18 @@ docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]
 docker-compose up -d
 ```
 
+然後如果你有很多個 `docker-compose.yml` `docker-compose-dev.yml`,
+
+你可以透過 `-f` 決定你要執行哪一個, 範例如下,
+
+```cmd
+docker-compose -f ./docker-compose-dev.yml up -d
+```
+
+`-f` `--file FILE` Specify an alternate compose file
+
+(default: `docker-compose.yml`)
+
 `up` 這個功能很強大，建議可以參考 [https://docs.docker.com/compose/reference/up/](https://docs.docker.com/compose/reference/up/)
 
 如果你希望每次都重新 build image，可以加上
