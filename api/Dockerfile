@@ -6,3 +6,5 @@ WORKDIR /docker_api
 COPY . /docker_api/
 RUN pip install -r requirements.txt
 
+# for entry point
+RUN chmod +x /docker_api/docker-entrypoint.sh

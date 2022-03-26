@@ -1312,6 +1312,8 @@ docker-compose up
 
 ![](https://i.imgur.com/iuCxLMY.png)
 
+:exclamation: 已經更新為自動 migrate:exclamation:
+
 但你仔細看上圖，你會發現他說你還沒 migrate
 
 接下來我們開啟另一個 cmd 進入 web 的 service，
@@ -1333,6 +1335,12 @@ python manage.py migrate
 ```
 
 ![](https://i.imgur.com/zMmZKuL.png)
+
+:exclamation: 已經更新為自動建立:exclamation:
+
+請參考 [docker-compose.yml](https://github.com/twtrubiks/docker-tutorial/blob/master/docker-compose.yml) 中的 environment ( 如下 ),
+
+`DJANGO_SUPERUSER_USERNAME` `DJANGO_SUPERUSER_PASSWORD` `DJANGO_SUPERUSER_EMAIL`
 
 順便在建立一個 superuser
 

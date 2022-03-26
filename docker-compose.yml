@@ -21,8 +21,17 @@ services:
 
     web:
       build: ./api
+      entrypoint: /docker_api/docker-entrypoint.sh
       command: python manage.py runserver 0.0.0.0:8000
       restart: always
+
+      # ref.
+      # https://docs.djangoproject.com/en/3.0/ref/django-admin/#django-admin-createsuperuser
+      environment:
+        - DJANGO_SUPERUSER_USERNAME=admin
+        - DJANGO_SUPERUSER_PASSWORD=admin1234
+        - DJANGO_SUPERUSER_EMAIL=admin@twtrubiks.com
+
       volumes:
         - api_data:/docker_api
         # (HOST:CONTAINER)
