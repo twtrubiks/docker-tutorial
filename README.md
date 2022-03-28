@@ -540,6 +540,10 @@ docker container prune
 
 更多資訊可參考 [container_prune](https://docs.docker.com/engine/reference/commandline/container_prune/)
 
+### ENTRYPOINT
+
+教學說明請點選 [entrypoint-tutorial](https://github.com/twtrubiks/docker-tutorial/tree/master/entrypoint-tutorial)
+
 ### Volume
 
 接下來要介紹 Volume，Volume 是 Docker 最推薦存放 persisting data（ 數據 ）的機制，
@@ -1312,7 +1316,7 @@ docker-compose up
 
 ![](https://i.imgur.com/iuCxLMY.png)
 
-:exclamation: 已經更新為自動 migrate:exclamation:
+:exclamation: [commit](https://github.com/twtrubiks/docker-tutorial/commit/398cb2fc375af8926cfe1eeabda33da018437897) 已經更新為自動 migrate:exclamation:
 
 但你仔細看上圖，你會發現他說你還沒 migrate
 
@@ -1336,17 +1340,17 @@ python manage.py migrate
 
 ![](https://i.imgur.com/zMmZKuL.png)
 
-:exclamation: 已經更新為自動建立:exclamation:
-
-請參考 [docker-compose.yml](https://github.com/twtrubiks/docker-tutorial/blob/master/docker-compose.yml) 中的 environment ( 如下 ),
-
-`DJANGO_SUPERUSER_USERNAME` `DJANGO_SUPERUSER_PASSWORD` `DJANGO_SUPERUSER_EMAIL`
-
 順便在建立一個 superuser
 
 ```cmd
 python manage.py createsuperuser
 ```
+
+:exclamation: [commit](https://github.com/twtrubiks/docker-tutorial/commit/398cb2fc375af8926cfe1eeabda33da018437897) 已經更新為自動建立 superuser:exclamation:
+
+請參考 [docker-compose.yml](https://github.com/twtrubiks/docker-tutorial/blob/master/docker-compose.yml) 中的 environment ( 如下 ),
+
+`DJANGO_SUPERUSER_USERNAME` `DJANGO_SUPERUSER_PASSWORD` `DJANGO_SUPERUSER_EMAIL`
 
 接著我們可以試著使用 GUI 介紹連接 db，
 
