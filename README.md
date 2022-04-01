@@ -401,6 +401,18 @@ docker logs [OPTIONS] CONTAINER
 docker logs -f --tail 100 CONTAINER
 ```
 
+也可以把 log 寫進去檔案中,
+
+```cmd
+docker logs CONTAINER >> access.log
+```
+
+也可以先過濾 log 再寫進檔案中,
+
+```cmd
+docker logs CONTAINER | grep "29/Mar/2022" >> access_tmp.log
+```
+
 顯示容器資源 ( CPU , I/O ...... )
 
 ```cmd
