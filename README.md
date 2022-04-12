@@ -419,6 +419,34 @@ docker logs CONTAINER | grep "29/Mar/2022" >> access_tmp.log
 docker stats [OPTIONS] [CONTAINER...]
 ```
 
+也可以加上 `--no-stream`
+
+```cmd
+docker stats --no-stream
+```
+
+`--no-stream` Disable streaming stats and only pull the first result.
+
+注意:exclamation::exclamation:這邊得到的 memory usage 會比實際上的還要小,
+
+因為這邊的值是再減去 cache usage memory.
+
+相關 issues 可參考 [https://github.com/moby/moby/issues/32253](https://github.com/moby/moby/issues/32253)
+
+```txt
+On Linux, the Docker CLI reports memory usage by subtracting cache usage from the total memory usage.
+```
+
+詳細說明可參考 [https://docs.docker.com/engine/reference/commandline/stats/](https://docs.docker.com/engine/reference/commandline/stats/)
+
+也可參考 [https://docs.docker.com/config/containers/runmetrics/](https://docs.docker.com/config/containers/runmetrics/)
+
+查看 container 中正在執行的 processes
+
+```CMD
+docker top CONTAINER
+```
+
 停止指定的 CONTAINER 中全部的 **processes**
 
 ```cmd
