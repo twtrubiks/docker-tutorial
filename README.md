@@ -1473,6 +1473,34 @@ docker run --name=portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/doc
 
 這個推薦給大家，有時候會遇到 port 被佔用，用指令查比較方便
 
+Linux
+
+安裝 net-tools
+
+```cmd
+sudo apt install net-tools
+```
+
+查看誰佔用 80 port
+
+```cmd
+sudo netstat -lnp | grep -w ':80'
+```
+
+`-l`, `--listening` display listening server sockets.
+
+`-n`, `--numeric` don't resolve names.
+
+`-p`, `--programs` display PID/Program name for sockets.
+
+也可以使用 `lsof`
+
+```cmd
+sudo lsof -i :80
+```
+
+`-i` select IPv[46] files.
+
 Windows
 
 查看所有 port 的佔用狀況
