@@ -13,6 +13,7 @@
 
 * [Youtube Tutorial-Ubuntu(Linux) 如何安裝 docker](https://youtu.be/eS_HMBC_RaA)
 * [目錄](https://github.com/twtrubiks/docker-tutorial#docker-compose-networks) - [Youtube Tutorial-docker-compose networks 說明](https://youtu.be/wmV9WfkpyGk)
+* [目錄](https://github.com/twtrubiks/docker-tutorial#docker-container-%E5%85%A7%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5%E5%88%B0%E6%9C%AC%E6%A9%9F-localhost-%E6%9C%8D%E5%8B%99) - Docker container 內如何連接到本機 localhost 服務
 * [目錄](https://github.com/twtrubiks/docker-tutorial#docker-compose-updown-%E5%92%8C-restart-%E7%9A%84%E5%B7%AE%E7%95%B0) - [Youtube Tutorial-docker-compose up/down 和 restart 的差異](https://youtu.be/nX-sbLPz-MU)
 * [目錄](https://github.com/twtrubiks/docker-tutorial/tree/master/docker-auto-run-linux) - [Youtube Tutorial-Linux 教學-開機自動啟動 docker / compose](https://youtu.be/c4YIQHCDLnQ)
 * [目錄](https://github.com/twtrubiks/docker-tutorial/tree/master/docker-env-tutorial) - [Youtube Tutorial - Docker 基本教學 - 在 docker compose 中善用 Environment variables](https://youtu.be/JwbI1aNKbtY)
@@ -1092,6 +1093,41 @@ expose 和 ports 最大的差別就是在 expose 不會暴露 port 給本機(HOS
 簡單說，就是 ports 可以被 本機(HOST) 和 containers 訪問 ; 而
 
 expose 是本機(HOST) 無法被訪問，只有在 containers 中可以被訪問。
+
+## Docker container 內如何連接到本機 localhost 服務
+
+![alt tag](https://i.imgur.com/kQLcALp.png)
+
+假設今天在本機上有一個 A 服務, 他是使用 docker run 起來的,
+
+而本機上還有一個 B 服務, 是用 vscode run 起來的 (非 docker),
+
+這時候我有一個需求, 我想要將我的 A 服務連線到我的 B 服務,
+
+也就是從 docker 內的服務連接到本機 localhost.
+
+比較簡單的方法, 就是透過 docker 內的這個參數,
+
+`host.docker.internal:host-gateway`.
+
+在你的 yml 裡面加上,
+
+```yml
+version: '3.5'
+services:
+
+  web:
+    ......
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+......
+```
+
+這樣當你在容器內, 就可以順利訪問本機:smile:
+
+```cmd
+curl http://host.docker.internal:8069
+```
 
 ## Docker Registry
 
