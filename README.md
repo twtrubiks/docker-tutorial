@@ -402,6 +402,32 @@ docker logs [OPTIONS] CONTAINER
 docker logs -f --tail 100 CONTAINER
 ```
 
+或是
+
+```cmd
+docker logs -f -n 100 CONTAINER
+```
+
+也可以透過 `--since` 從指定時間到現在的 log,
+
+例如,
+
+```cmd
+docker logs --since 2023-04-13T09:20:00 <container_id>
+```
+
+從 10 分鐘前到現在的 log
+
+```cmd
+docker logs --since 10m CONTAINER
+```
+
+1 小時前到現在的 log
+
+```cmd
+docker logs --since 1h CONTAINER
+```
+
 也可以把 log 寫進去檔案中,
 
 ```cmd
