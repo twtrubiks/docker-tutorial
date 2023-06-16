@@ -9,6 +9,11 @@ services:
       ports:
         - "5432:5432"
         # (HOST:CONTAINER)
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
       volumes:
         - pgdata:/var/lib/postgresql/data/
       networks:
