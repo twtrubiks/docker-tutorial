@@ -409,7 +409,7 @@ docker logs -f --tail 100 CONTAINER
 docker logs -f -n 100 CONTAINER
 ```
 
-也可以透過 `--since` 從指定時間到現在的 log,
+可以透過 `--since` 從指定時間到現在的 log,
 
 例如,
 
@@ -429,16 +429,46 @@ docker logs --since 10m CONTAINER
 docker logs --since 1h CONTAINER
 ```
 
+如果想指定時間, 查看特定區間的 logs,
+
+可以先使用 `-t` 找出 docker 的時間格式,
+
+```cmd
+docker logs -t CONTAINER
+```
+
+接著就可以使用 `--since` 或 `--until` 指定時間段,
+
+一定要用 docker 的時間格式, 不然會無法生效.
+
+這邊來個組合, 找出 8:10 ~ 8:30 的全部 log
+
+```cmd
+docker logs --since 2023-12-10T8:10:00.346748975Z  --until 2023-12-10T8:30:00.346748975Z  CONTAINER
+```
+
 也可以把 log 寫進去檔案中,
 
 ```cmd
 docker logs CONTAINER >> access.log
 ```
 
+如果上述指令沒有生效, 請修改成以下
+
+```cmd
+docker logs CONTAINER >& access.log
+```
+
 也可以先過濾 log 再寫進檔案中,
 
 ```cmd
 docker logs CONTAINER | grep "29/Mar/2022" >> access_tmp.log
+```
+
+如果上述指令沒有生效, 請修改成以下
+
+```cmd
+docker logs CONTAINER 2>&1 | grep "29/Mar/2022" >& access_tmp.log
 ```
 
 顯示容器資源 ( CPU , I/O ...... )
