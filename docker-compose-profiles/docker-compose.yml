@@ -1,0 +1,40 @@
+services:
+
+    nginx:
+        container_name: nginx
+        image: nginx:1.24.0
+        restart: always
+        ports:
+          - "83:80"
+
+    pgadmin4:
+        container_name: my_pgadmin4
+        image: dpage/pgadmin4
+        restart: "always"
+        environment:
+          PGADMIN_DEFAULT_EMAIL: "YOUR@gmail.com"
+          PGADMIN_DEFAULT_PASSWORD: "PASSWORD"
+          PGADMIN_CONFIG_SESSION_EXPIRATION_TIME: 365
+          PGADMIN_CONFIG_MAX_SESSION_IDLE_TIME: 60
+        volumes:
+          - pgadmin4-data:/var/lib/pgadmin
+        ports:
+          - "5055:80"
+        profiles:
+          - debug
+
+    redis:
+      image: redis
+      container_name: redis
+      restart: always
+      ports:
+        - "6379:6379"
+      profiles:
+        - dev
+      volumes:
+        - redis-data:/data
+
+
+volumes:
+    pgadmin4-data:
+    redis-data:
