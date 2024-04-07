@@ -1,0 +1,10 @@
+services:
+
+  nginx:
+    image: nginx:1.24.0
+    restart: always
+    container_name: nginx
+    ports:
+      - ":80"
+    environment:
+      - TEST="hello"
