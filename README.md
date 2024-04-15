@@ -1745,9 +1745,10 @@ docker inspect --format '{{.HostConfig.LogConfig}}' CONTAINER
 version: '3.5'
 services:
   web:
-    image: odoo:15.0
+    image: odoo:17.0
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8069:8069"
     healthcheck:
@@ -1758,9 +1759,9 @@ services:
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./config:/etc/odoo
-      - ./addons:/mnt/extra-addons
+
   db:
-    image: postgres:13
+    image: postgres:16
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=odoo
@@ -1775,8 +1776,9 @@ services:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
 
 volumes:
-  odoo-web-data:
-  odoo-db-data:
+    odoo-web-data:
+    odoo-db-data:
+
 ```
 
 當執行時, 你會發現多了一個 `health: starting` 如下圖,
@@ -1798,6 +1800,16 @@ docker 的 Health Check 會回傳你數字,
 0 代表成功，container is healthy
 
 1 代表失敗，假設失敗超過指定次數(`retries: 5`), container is unhealthy
+
+至於 depends_on 底下的 `condition: service_healthy` 代表必須檢查通過,
+
+才會啟動, 可參考 [Control startup](https://docs.docker.com/compose/startup-order/#control-startup), 有以下三種,
+
+`service_started` 如果沒有特別指定, 就是這一種.
+
+`service_healthy`
+
+`service_completed_successfully`
 
 ## 後記：
 
