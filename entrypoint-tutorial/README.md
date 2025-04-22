@@ -2,7 +2,7 @@
 
 docker 指令中的 ENTRYPOINT 和 CMD 很像, 但有點不太一樣,
 
-這邊簡單和大家說明一下:smile:
+這邊簡單和大家說明一下 :smile:
 
 ## CMD
 
@@ -38,9 +38,9 @@ docker: Error response from daemon: failed to create shim: OCI runtime create fa
 
 這樣就正常了, 成功顯示 dev 底下的東西.
 
-但是這個在實際上有點麻煩, 因為如果指令非常長呢:question:
+但是這個在實際上有點麻煩, 因為如果指令非常長呢 :question:
 
-所以有了接下來要介紹的 ENTRYPOINT:smile:
+所以有了接下來要介紹的 ENTRYPOINT :smile:
 
 ## ENTRYPOINT
 

@@ -2,7 +2,7 @@
 
 * [Youtube Tutorial - Docker 基本教學 - 在 docker compose 中善用 Environment variables](https://youtu.be/JwbI1aNKbtY)
 
-在 docker compose 中如何善用 Environment variables:pencil2:
+在 docker compose 中如何善用 Environment variables :pencil2:
 
 [Environment variables in Compose](https://docs.docker.com/compose/environment-variables/#substitute-environment-variables-in-compose-files)
 
@@ -51,7 +51,7 @@ docker-compose config
 
 ![alt tag](https://i.imgur.com/cTc0KtV.png)
 
-注意到 ODOO_TAG 和 POSTGRES_TAG 了嗎:smile:
+注意到 ODOO_TAG 和 POSTGRES_TAG 了嗎 :smile:
 
 這邊的值和剛剛設定的一模一樣。
 
@@ -83,11 +83,11 @@ services:
 
 還有一種是 `Environment file`,
 
-主要是建立一個 `.env` 檔案, 將資訊存在裡面, 但這邊要注意:exclamation:
+主要是建立一個 `.env` 檔案, 將資訊存在裡面, 但這邊要注意 :exclamation:
 
 `Shell environment variables` > `Environment file`
 
-所以如果要使用 `.env`, 記得要 unset:exclamation:
+所以如果要使用 `.env`, 記得要 unset :exclamation:
 
 [.env](https://github.com/twtrubiks/docker-tutorial/blob/master/docker-env-tutorial/.env)
 

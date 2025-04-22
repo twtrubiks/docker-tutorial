@@ -79,7 +79,7 @@ Feauture  | Containers                  |  Virtual Machines ( 傳統的虛擬�
  支援數量 | 非常多 Containers        | 10多個就很了不起了
  複製相同環境 | 快        | 超慢
 
-不理解:question::question::question:
+不理解 :question: :question: :question:
 
 我們來看一張圖，包準你懂
 
@@ -96,7 +96,7 @@ Feauture  | Containers                  |  Virtual Machines ( 傳統的虛擬�
 
 比起像是 [https://www.virtualbox.org/](https://www.virtualbox.org/)，Docker 的利用率更高，我們可以設定更多
 
-的 Containers ，而且啟動速度飛快！！:flushed:
+的 Containers, 而且啟動速度飛快！！ :flushed:
 
 #### 統一環境
 
@@ -142,7 +142,7 @@ Container 在啟動的時候會建立一層在最外（上）層並且是讀寫�
 
 可以把它想成類似 [GitHub](https://github.com/)，裡面存放了非常多的 Image ，可在 [Docker Hub](https://hub.docker.com/) 中查看。
 
-更詳細的我這邊就不再解釋惹，留給大家做作功課:stuck_out_tongue:
+更詳細的我這邊就不再解釋惹，留給大家做作功課 :stuck_out_tongue:
 
 ## 安裝
 
@@ -214,7 +214,7 @@ Linux
 
 雖然在 ubuntu 中有 `snap` 可以非常快速的安裝 docker,
 
-但在這邊我們不使用 `snap` 的方法安裝:smile:
+但在這邊我們不使用 `snap` 的方法安裝 :smile:
 
 請參考官方文件步驟安裝,
 
@@ -222,7 +222,7 @@ Get Docker Engine - Community for Ubuntu
 
 [Get Docker Engine - Community for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
-安裝後步驟 (optional:exclamation:), 但建議參考一下
+安裝後步驟 (optional :exclamation:), 但建議參考一下
 
 [Post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/)
 
@@ -489,7 +489,7 @@ docker stats --no-stream
 
 `--no-stream` Disable streaming stats and only pull the first result.
 
-注意:exclamation::exclamation:這邊得到的 memory usage 會比實際上的還要小,
+注意 :exclamation: :exclamation: 這邊得到的 memory usage 會比實際上的還要小,
 
 因為這邊的值是再減去 cache usage memory.
 
@@ -841,7 +841,7 @@ docker network disconnect [OPTIONS] NETWORK CONTAINER
 
 ![](https://i.imgur.com/YxrrO7t.png)
 
-Compose 是定義和執行多 Container 管理的工具，不懂我在說什麼:question::question::question:
+Compose 是定義和執行多 Container 管理的工具，不懂我在說什麼 :question: :question: :question:
 
 試著想想看，通常一個 Web 都還會有 DB，甚至可能還有 [Redis](https://redis.io/) 或 [Celery](http://www.celeryproject.org/)，
 
@@ -1030,7 +1030,7 @@ docker-compose push
 
 * [Youtube Tutorial - docker-compose networks 說明](https://youtu.be/wmV9WfkpyGk)
 
-這邊多補充 docker-compose networks 的觀念，因為剛好最近有用到:smile:
+這邊多補充 docker-compose networks 的觀念，因為剛好最近有用到 :smile:
 
 ```yml
 version: '3.5'
@@ -1125,7 +1125,7 @@ docker run -p 80 \
 
 本機被隨機分配到 32768 以及 32769 port，
 
-這邊不管我們怎麼設定 ports，這些 ports 都會暴露給本機 (HOST) 以及其他 containers，這點很重要:exclamation::exclamation:
+這邊不管我們怎麼設定 ports，這些 ports 都會暴露給本機 (HOST) 以及其他 containers，這點很重要 :exclamation: :exclamation:
 
 也就是說，如果本機 5001 ports 被使用了，其他的 containers 就無法使用 5001 ports，
 
@@ -1186,7 +1186,7 @@ services:
 ......
 ```
 
-這樣當你在容器內, 就可以順利訪問本機:smile:
+這樣當你在容器內, 就可以順利訪問本機 :smile:
 
 ```cmd
 curl http://host.docker.internal:8069
@@ -1196,7 +1196,7 @@ curl http://host.docker.internal:8069
 
 假設今天不考慮使用網路的方法, 如果一個容器 db 是在 5432, 另一個容器是 pgadmin4,
 
-這樣要怎麼透過 pgadmin4 連接到我的本機的 5432 呢😵‍💫
+這樣要怎麼透過 pgadmin4 連接到我的本機的 5432 呢 😵‍💫
 
 答案就是使用 `host.docker.internal:host-gateway`.
 
@@ -1206,7 +1206,7 @@ curl http://host.docker.internal:8069
 
 可以把它想成是一個類似 github 的地方，只不過裡面變成是存 docker 的東西，當然，
 
-也可以自己架，但會有一些額外的成本，像是網路，維護等等，這部分就要自己衡量了:grinning:
+也可以自己架，但會有一些額外的成本，像是網路，維護等等，這部分就要自己衡量了 :grinning:
 
 接下來教大家如何將 image push 到 Docker Registry :smiley:
 
@@ -1367,13 +1367,13 @@ volumes:
 
 溫馨小提醒 1  :heart:
 
-可能有人會問為什麼我是使用 `0.0.0.0`，而不是使用 `127.0.0.1`:question::question:
+可能有人會問為什麼我是使用 `0.0.0.0`，而不是使用 `127.0.0.1` :question: :question:
 
 ```cmd
 python manage.py runserver 0.0.0.0:8000
 ```
 
-`127.0.0.1`，並不代表真正的 **本機**，我們經常認為他是本機是因為我們電腦的 `host` 預設都幫你設定好了:smirk:
+`127.0.0.1`，並不代表真正的 **本機**，我們經常認為他是本機是因為我們電腦的 `host` 預設都幫你設定好了 :smirk:
 
 詳細的 `host` 設定教學可參考 [hosts-設定檔 以及 查詢內網 ip](https://github.com/twtrubiks/docker-django-nginx-uswgi-postgres-tutorial#hosts-設定檔-以及-查詢內網-ip)，
 
@@ -1435,7 +1435,7 @@ web 容器
 docker run --name web -v api_data:/docker_api -p 8000:8000 --network=my_network --restart always web_image python manage.py runserver 0.0.0.0:8000
 ```
 
-以上這樣，和 `docker-compose.yml`  其實是一樣的:open_mouth:
+以上這樣，和 `docker-compose.yml`  其實是一樣的 :open_mouth:
 
 設定完了之後，接下來我們就可以啟動他了
 
@@ -1463,7 +1463,7 @@ docker-compose up
 
 ![](https://i.imgur.com/iuCxLMY.png)
 
-:exclamation: [commit](https://github.com/twtrubiks/docker-tutorial/commit/398cb2fc375af8926cfe1eeabda33da018437897) 已經更新為自動 migrate:exclamation:
+:exclamation: [commit](https://github.com/twtrubiks/docker-tutorial/commit/398cb2fc375af8926cfe1eeabda33da018437897) 已經更新為自動 migrate :exclamation:
 
 但你仔細看上圖，你會發現他說你還沒 migrate
 
@@ -1493,7 +1493,7 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-:exclamation: [commit](https://github.com/twtrubiks/docker-tutorial/commit/398cb2fc375af8926cfe1eeabda33da018437897) 已經更新為自動建立 superuser:exclamation:
+:exclamation: [commit](https://github.com/twtrubiks/docker-tutorial/commit/398cb2fc375af8926cfe1eeabda33da018437897) 已經更新為自動建立 superuser :exclamation:
 
 請參考 [docker-compose.yml](https://github.com/twtrubiks/docker-tutorial/blob/master/docker-compose.yml) 中的 environment ( 如下 ),
 
@@ -1674,7 +1674,7 @@ log 是一個 json 的檔案
 
 ![alt tag](https://i.imgur.com/feSGmcm.png)
 
-如果你一直不去管他, log 就會越來越大:scream:
+如果你一直不去管他, log 就會越來越大 :scream:
 
 以下狀況這個 log 會被清除, 就是修改了 `docker-compose.yml` 或是
 
@@ -1686,7 +1686,7 @@ log 是一個 json 的檔案
 
 那你可能會問我, 如果我很長一段時間都不會修改 `docker-compose.yml` 以及執行
 
-`docker-compose down` 該怎麼辦:sob: (因為 log 可能會長很快)
+`docker-compose down` 該怎麼辦 :sob: (因為 log 可能會長很快)
 
 這邊提供大家一個方法, 使用 linux 中的 truncate 指令(可參考 [ Linux 指令教學 - truncate](https://github.com/twtrubiks/linux-note#truncate))
 
@@ -1734,7 +1734,7 @@ docker inspect --format '{{.HostConfig.LogConfig}}' CONTAINER
 
 ![alt tag](https://i.imgur.com/L6Z7bYX.png)
 
-這樣設定完之後, 就不用再擔心 container log 吃掉大量的容量了:smile:
+這樣設定完之後, 就不用再擔心 container log 吃掉大量的容量了 :smile:
 
 ## Health Check
 
@@ -1844,7 +1844,7 @@ Docker 可以玩的真的很多，延伸參考
 
 ## Donation
 
-文章都是我自己研究內化後原創，如果有幫助到您，也想鼓勵我的話，歡迎請我喝一杯咖啡:laughing:
+文章都是我自己研究內化後原創，如果有幫助到您，也想鼓勵我的話，歡迎請我喝一杯咖啡 :laughing:
 
 綠界科技ECPAY ( 不需註冊會員 )
 
