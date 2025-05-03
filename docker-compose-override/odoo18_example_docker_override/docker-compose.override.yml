@@ -1,0 +1,4 @@
+services:
+  web:
+    # command: odoo -u mail -d ${DB_NAME}
+    command: odoo -i mail -d ${DB_NAME}

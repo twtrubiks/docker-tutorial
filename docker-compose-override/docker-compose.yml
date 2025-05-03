@@ -1,7 +1,7 @@
 services:
 
   nginx:
-    image: nginx:1.24.0
+    image: nginx
     restart: always
     container_name: nginx
     ports:
