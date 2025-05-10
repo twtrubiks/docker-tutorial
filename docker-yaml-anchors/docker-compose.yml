@@ -1,6 +1,6 @@
 
-x-config: &x-config
-  image: nginx:1.24.0
+x-config-key: &x-config
+  image: nginx
   restart: always
   logging:
     driver: "json-file"
@@ -22,7 +22,6 @@ services:
   nginx2:
     <<: *x-config
     container_name: nginx2
-    # 假如有寫任何一行 volumes, 會完全附蓋掉 x-config 的 volumes
     volumes:
       - static_nginx_2:/tmp2
     ports:
@@ -33,8 +32,8 @@ services:
     container_name: nginx3
     volumes:
       - static_nginx_3:/tmp3
-      - static:/my_tmp  # 要再自己手動加上去
-      - ./local_static:/local_static # 要再自己手動加上去
+      - static:/my_tmp
+      - ./local_static:/local_static
     ports:
       - "83:80"
 
