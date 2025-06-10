@@ -1,5 +1,7 @@
 # docker-tutorial
 
+[English Version](README_en.md)
+
  Docker 基本教學 - 從無到有 Docker-Beginners-Guide
 
  教你用 [Docker](https://www.docker.com/) 建立 [Django](https://github.com/django/django) + [PostgreSQL](https://www.postgresql.org/) 📝

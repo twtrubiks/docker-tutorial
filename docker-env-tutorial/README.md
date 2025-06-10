@@ -1,5 +1,7 @@
 ## Environment variables in Compose
 
+[English Version](README_en.md)
+
 * [Youtube Tutorial - Docker 基本教學 - 在 docker compose 中善用 Environment variables](https://youtu.be/JwbI1aNKbtY)
 
 在 docker compose 中如何善用 Environment variables :pencil2:

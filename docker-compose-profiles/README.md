@@ -1,5 +1,7 @@
 # 介紹 docker-compose-profiles
 
+[English Version](README_en.md)
+
 可參考官方文檔 [Using profiles with Compose](https://docs.docker.com/compose/profiles/)
 
 簡單說, 可以透過它去管理你的 compose,

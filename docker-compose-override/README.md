@@ -1,5 +1,7 @@
 # 介紹 docker-compose-override
 
+[English Version](README_en.md)
+
 * [Youtube Tutorial - Odoo + Docker 進階技巧：善用 override.yml 批次更新多個 DB (等待新增)](xx)
 
 ## 說明
