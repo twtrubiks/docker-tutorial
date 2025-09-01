@@ -2,7 +2,7 @@
 
 [中文版](README.md)
 
-* [Youtube Tutorial - Odoo + Docker Advanced Techniques: Using override.yml to Batch Update Multiple DBs (Coming Soon)](xx)
+* [Youtube Tutorial - Odoo + Docker Advanced Techniques: Using override.yml to Batch Update Multiple DBs](https://youtu.be/oR_wM8rQKYI)
 
 ## Description
 
