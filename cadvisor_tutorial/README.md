@@ -1,5 +1,7 @@
 # cadvisor - 可監控 docker 容器
 
+[English Version](README_en.md)
+
 基本上這個工具就是可以監控 docker 容器, 直接 `docker compose up` 體驗看看吧,
 
 官方介紹可參考 [https://github.com/google/cadvisor](https://github.com/google/cadvisor),
@@ -13,5 +15,3 @@
 ![](https://i.imgur.com/B27oDgD.png)
 
 ![](https://i.imgur.com/mjME1G0.png)
-
-

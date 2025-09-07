@@ -1,5 +1,7 @@
 # ENTRYPOINT
 
+[English Version](README_en.md)
+
 docker 指令中的 ENTRYPOINT 和 CMD 很像, 但有點不太一樣,
 
 這邊簡單和大家說明一下 :smile:

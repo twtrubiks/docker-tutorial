@@ -1,6 +1,8 @@
 # 介紹 YAML Anchors
 
-* [Youtube Tutorial - YAML Anchors (& * <<) 與 Docker Compose 實戰教學：告別重複設定！(等待新增)](x)
+[English Version](README_en.md)
+
+* [Youtube Tutorial - YAML Anchors (& * <<) 與 Docker Compose 實戰教學：告別重複設定！](https://youtu.be/6QSfqTymeXc)
 
 這個功能不是 docker 的, 是 YAML 的功能, 叫做 YAML Anchors,
 
