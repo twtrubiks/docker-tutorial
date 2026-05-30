@@ -643,6 +643,39 @@ docker container prune
 
 For more information, see [container_prune](https://docs.docker.com/engine/reference/commandline/container_prune/)
 
+Copy files between the host (local machine) and a container
+
+```cmd
+docker cp [OPTIONS] SRC_PATH CONTAINER:DEST_PATH
+docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH
+```
+
+Example 1 ( Copy config.json from the host into the container's /app directory )
+
+```cmd
+docker cp ./config.json my_container:/app/config.json
+```
+
+Note that the target directory must already exist in the container. If it does not, you need to create the corresponding directory in the container first,
+
+otherwise you will get an error like `Error response from daemon: Could not find the file ...`.
+
+You can create the directory in the container with the following command first
+
+```cmd
+docker exec my_container mkdir -p /app
+```
+
+Example 2 ( Copy a log file from the container out to the host's output directory )
+
+```cmd
+docker cp my_container:/var/log/app.log ./output
+```
+
+If you just want to move data between the host and a container without setting up a Volume, the quickest way is to use `docker cp`.
+
+For more information, see [docker cp](https://docs.docker.com/engine/reference/commandline/cp/)
+
 ### ENTRYPOINT
 
 For tutorial instructions, please click [entrypoint-tutorial](https://github.com/twtrubiks/docker-tutorial/tree/master/entrypoint-tutorial)

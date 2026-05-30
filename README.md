@@ -644,6 +644,39 @@ docker container prune
 
 更多資訊可參考 [container_prune](https://docs.docker.com/engine/reference/commandline/container_prune/)
 
+在主機（本機）和 container 之間複製檔案
+
+```cmd
+docker cp [OPTIONS] SRC_PATH CONTAINER:DEST_PATH
+docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH
+```
+
+範例 1 ( 把主機的 config.json 複製進 container 的 /app 目錄 )
+
+```cmd
+docker cp ./config.json my_container:/app/config.json
+```
+
+這邊要注意 container 中有沒有對應的目錄，如果沒有，要先到 container 中建立對應的資料夾，
+
+不然會出現類似這樣的錯誤 `Error response from daemon: Could not find the file ...`，
+
+可以先用以下指令在 container 中把資料夾建立起來
+
+```cmd
+docker exec my_container mkdir -p /app
+```
+
+範例 2 ( 把 container 裡的 log 抓出來到主機的 output 目錄 )
+
+```cmd
+docker cp my_container:/var/log/app.log ./output
+```
+
+如果只是想在本機和 container 之間移動資料，又不想特別建立 Volume，最快的方式就是使用 `docker cp`。
+
+更多資訊可參考 [docker cp](https://docs.docker.com/engine/reference/commandline/cp/)
+
 ### ENTRYPOINT
 
 教學說明請點選 [entrypoint-tutorial](https://github.com/twtrubiks/docker-tutorial/tree/master/entrypoint-tutorial)
